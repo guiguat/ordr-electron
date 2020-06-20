@@ -4,7 +4,7 @@ import { AuthContext } from '../../Contexts/Auth';
 import './NavBar.scss';
 
 const NavBar: React.FC = () => {
-    const {LogOut} = useContext(AuthContext);
+    const {LogOut, currentUser} = useContext(AuthContext);
     return (
     
         <nav className="navbar navbar-dark px-5 row bg-primary">
@@ -14,11 +14,20 @@ const NavBar: React.FC = () => {
                     <a className="nav-link" href="/">Home</a>
                 </li>
                 <li className="nav-item ml-3">
-                    <a className="nav-link" href="/login">Link</a>
+                    <a className="nav-link" href="/product">Product</a>
+                </li>
+                <li className="nav-item ml-3">
+                    <a className="nav-link" href="/users">Users</a>
                 </li>
             </ul>
 
-            <button className="btn text-white my-2 my-sm-0" onClick={LogOut}>LogOut</button>
+            <button 
+             className="btn text-white my-2 my-sm-0"
+             onClick={LogOut}
+            >
+                {/* change to user.displayname later */}
+                {currentUser?.displayName}, LogOut
+            </button>
         </nav>
   
     );
