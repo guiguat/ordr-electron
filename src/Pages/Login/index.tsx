@@ -7,7 +7,7 @@ import app from '../../firebase';
 
 const Login: React.FC = () => {
 
-  const {currentUser, changeState} = useContext(AuthContext);
+  const {currentUser} = useContext(AuthContext);
 
   const history = useHistory();
 
@@ -23,10 +23,9 @@ const Login: React.FC = () => {
         .auth()
         .signInWithEmailAndPassword(email.value, password.value)
         .then(res=>{
+          // changeState();
           console.log(res);
         })
-      changeState();
-      alert(currentUser);
       history.push("/");
     } catch (error) {
 

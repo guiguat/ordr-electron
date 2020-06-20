@@ -10,12 +10,13 @@ import Home from '../Pages/Home';
 
 const Routes: React.FC = () =>{
     const {currentUser} = useContext(AuthContext);
+    console.log(currentUser);
     return (
         <Router>
             <Switch>
                 <PrivateRoute 
                  isAuth={!!currentUser} 
-                 path="/home" 
+                 path="/" 
                  redirectPath="/login"
                  exact 
                  component={Home}

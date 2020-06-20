@@ -4,7 +4,7 @@ import app from "../firebase";
 
 interface IAuthContext {
     currentUser?: User | null;
-    changeState():Promise<void>;
+    // changeState():Promise<void>;
 }
 
 export const AuthContext = React.createContext<IAuthContext>({} as IAuthContext);
@@ -23,7 +23,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     
 
     return (
-        <AuthContext.Provider value={ { currentUser, changeState } }>
+        <AuthContext.Provider value={ { currentUser } }>
             {children}
         </AuthContext.Provider>
     );
