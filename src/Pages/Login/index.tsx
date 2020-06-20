@@ -3,7 +3,8 @@ import { AuthContext } from '../../Contexts/Auth';
 import { useHistory, Redirect } from 'react-router';
 import app from '../../firebase';
 
-import './loginStyles.css';
+import './loginStyles.scss';
+import '../../custom.scss';
 
 const Login: React.FC = () => {
 
@@ -41,20 +42,22 @@ const Login: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="container-fluid p-5">
       <form onSubmit={handleLogIn}>
-        <label>
-          Email:
-          <input type="email" name="email" required/>
-        </label>
-        <br/>
-        <label>
-          Password:
-          <input type="password" name="password" required/>
-        </label>
-        <button type="submit">LogIn</button>
+
+        <div className="form-group">
+          <label htmlFor="email">Email address</label>
+          <input type="email" className="form-control" name="email" id="email" required />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" required className="form-control" id="password"/>
+        </div>
+    
+        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
-    </>
+    </div>
   );
 }
 
