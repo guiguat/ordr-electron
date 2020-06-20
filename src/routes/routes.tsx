@@ -1,9 +1,7 @@
 import React, {useContext} from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { AuthContext } from '../Contexts/Auth';
-//components
-// import AppRoutes from "./app.routes";
-// import AuthRoutes from "./auth.routes";
+
 import Login from '../Pages/Login';
 import PrivateRoute from './PrivateRoute';
 import Home from '../Pages/Home';
