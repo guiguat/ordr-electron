@@ -42,8 +42,8 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className="container-fluid p-5 align-items-center justify-content-center">
-      <div className="row mx-auto justify-content-center">
+    <div className="container-fluid p-5 align-items-center h-100 justify-content-center">
+      <div className="row mx-auto h-100">
 
         <div className="col pl-5">
 

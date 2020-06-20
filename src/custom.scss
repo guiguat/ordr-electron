@@ -18,5 +18,11 @@ $dark: #282A36;
     background-position: center;
     height: 25rem;   
 }
+html, body, #root{
+    width: 100%!important;
+    height: 100%!important;
+    margin: 0;
+    padding: 0;
+ }
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
