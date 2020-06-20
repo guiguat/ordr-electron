@@ -4,6 +4,7 @@ import app from "../firebase";
 
 interface IAuthContext {
     currentUser?: User | null;
+    LogOut():void;
 }
 
 export const AuthContext = React.createContext<IAuthContext>({} as IAuthContext);
@@ -15,8 +16,12 @@ export const AuthProvider: React.FC = ({ children }) => {
         app.auth().onAuthStateChanged(userState => setCurrentUser(userState));        
     },[]);
 
+    function LogOut(){
+        app.auth().signOut();
+    }
+
     return (
-        <AuthContext.Provider value={ { currentUser } }>
+        <AuthContext.Provider value={ { currentUser, LogOut } }>
             {children}
         </AuthContext.Provider>
     );
