@@ -6,8 +6,6 @@ import app from '../../firebase';
 import './loginStyles.scss';
 import '../../custom.scss';
 
-import {ReactComponent as Illustration} from "../../assets/illustration-min.svg";
-
 const Login: React.FC = () => {
 
   const {currentUser} = useContext(AuthContext);
