@@ -3,7 +3,7 @@ import { AuthContext } from '../../Contexts/Auth';
 import { useHistory, Redirect } from 'react-router';
 import app from '../../firebase';
 
-// import './styles';
+import './loginStyles';
 
 const Login: React.FC = () => {
 
