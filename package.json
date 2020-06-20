@@ -18,6 +18,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "start": "react-scripts build && electron .",
     "start:web": "react-scripts start",
     "build:web": "react-scripts build",
     "start:electron": "electron .",
