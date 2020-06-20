@@ -37,7 +37,7 @@ const Login: React.FC = () => {
     
   };
 
-  if(!!authContext.currentUser){
+  if(!!currentUser){
     return <Redirect to="/" />
   }
 
