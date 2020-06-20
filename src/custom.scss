@@ -1,5 +1,22 @@
 // Override default variables before the import
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500;700&display=swap');
+$font-family-sans-serif: "Roboto", sans-serif;
+$logo-font-family:"Montserrat", sans-serif;
 $green:   #43A521;
 $primary: $green;
+$dark: #282A36;
+
+.logo-lg{
+    font-family: $logo-font-family;
+    font-weight: bold;
+    color: $primary
+}
+.illustration{
+    background-image: url("./assets/illustration-min.svg")!important;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 25rem;   
+}
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
