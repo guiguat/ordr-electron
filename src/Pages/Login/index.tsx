@@ -6,6 +6,8 @@ import app from '../../firebase';
 import './loginStyles.scss';
 import '../../custom.scss';
 
+import {ReactComponent as Illustration} from "../../assets/illustration-min.svg";
+
 const Login: React.FC = () => {
 
   const {currentUser} = useContext(AuthContext);
@@ -42,21 +44,35 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className="container-fluid p-5">
-      <form onSubmit={handleLogIn}>
+    <div className="container-fluid p-5 align-items-center justify-content-center">
+      <div className="row mx-auto justify-content-center">
 
-        <div className="form-group">
-          <label htmlFor="email">Email address</label>
-          <input type="email" className="form-control" name="email" id="email" required />
+        <div className="col pl-5">
+
+          <h1 className="logo-lg mb-5">ORDR.</h1>
+          <h2 className="text-dark">Sign-In</h2>
+
+          <form className="my-4" onSubmit={handleLogIn}>
+            <div className="form-group">
+              <label htmlFor="email">Email address</label>
+              <input type="email" className="form-control" name="email" id="email" required />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input type="password" name="password" required className="form-control" id="password"/>
+            </div>
+        
+            <button type="submit" className="btn btn-primary">Sign-In</button>
+          </form>
+
         </div>
 
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input type="password" name="password" required className="form-control" id="password"/>
+        <div className="col p-0 illustration">
+          {/* <Illustration className="illustration float-right"/> */}
         </div>
-    
-        <button type="submit" className="btn btn-primary">Submit</button>
-      </form>
+
+      </div>
     </div>
   );
 }
