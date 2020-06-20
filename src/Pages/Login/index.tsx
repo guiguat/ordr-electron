@@ -61,7 +61,7 @@ const Login: React.FC = () => {
               <input type="password" name="password" required className="form-control" id="password"/>
             </div>
         
-            <button type="submit" className="btn btn-primary">Sign-In</button>
+            <button type="submit" className="btn btn-primary w-100">Sign-In</button>
           </form>
 
         </div>
