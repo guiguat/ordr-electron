@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../../Contexts/Auth';
+import { useAuth } from '../../Contexts/Auth';
 
 import './NavBar.scss';
 
 const NavBar: React.FC = () => {
-    const {LogOut, currentUser} = useContext(AuthContext);
+    const {LogOut, currentUser} = useAuth();
     return (
     
         <nav className="navbar navbar-dark px-5 bg-primary">
