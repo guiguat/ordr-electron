@@ -21,12 +21,13 @@ const NavBar: React.FC = () => {
                 </li>
             </ul>
 
+            <span className="text-white text-sm my-2 my-sm-0">{currentUser?.displayName}</span>
+
             <button 
-             className="btn text-white my-2 my-sm-0"
+             className="btn btn-sm btn-dark text-white my-2 ml-3    my-sm-0"
              onClick={LogOut}
             >
-                {/* change to user.displayname later */}
-                {currentUser?.displayName}, LogOut
+                LogOut
             </button>
         </nav>
   
