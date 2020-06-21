@@ -4,7 +4,6 @@ import { useHistory, Redirect } from 'react-router';
 import app from '../../firebase';
 
 import './loginStyles.scss';
-import '../../custom.scss';
 
 const Login: React.FC = () => {
 
@@ -48,7 +47,7 @@ const Login: React.FC = () => {
         <div className="col pl-5">
 
           <h1 className="logo-lg mb-5">ORDR.</h1>
-          <h2 className="text-dark">Sign-In</h2>
+          <h2 className="text-dark">Login</h2>
 
           <form className="my-4" onSubmit={handleLogIn}>
             <div className="form-group">
@@ -61,7 +60,7 @@ const Login: React.FC = () => {
               <input type="password" name="password" required className="form-control" id="password"/>
             </div>
         
-            <button type="submit" className="btn btn-primary w-100">Sign-In</button>
+            <button type="submit" className="btn btn-primary w-100">Login</button>
           </form>
 
         </div>
