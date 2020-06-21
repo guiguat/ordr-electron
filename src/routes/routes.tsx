@@ -1,6 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-import { AuthContext } from '../Contexts/Auth';
+import { useAuth } from '../Contexts/Auth';
 
 import Login from '../Pages/Login';
 import PrivateRoute from './PrivateRoute';
@@ -10,7 +10,7 @@ import Users from '../Pages/Users';
 import "../custom.scss";
 
 const Routes: React.FC = () =>{
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser } = useAuth();
 
     return ( 
         <Router>

@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../Contexts/Auth';
+import React from 'react';
+import { useAuth } from '../../Contexts/Auth';
 import { useHistory, Redirect } from 'react-router';
 import app from '../../firebase';
 
@@ -7,7 +7,7 @@ import './loginStyles.scss';
 
 const Login: React.FC = () => {
 
-  const {currentUser} = useContext(AuthContext);
+  const {currentUser} = useAuth();
 
   const history = useHistory();
 
