@@ -5,6 +5,10 @@ $logo-font-family:"Montserrat", sans-serif;
 $green:   #43A521;
 $primary: $green;
 $dark: #282A36;
+$fullscreen-height:91.6%;
+.h-full{
+    height: $fullscreen-height;
+}
 
 .logo-lg{
     font-family: $logo-font-family;
