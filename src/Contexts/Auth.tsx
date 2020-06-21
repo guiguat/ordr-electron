@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { User } from 'firebase';
 import app from "../firebase";
-import { RSA_NO_PADDING } from 'constants';
 
 interface IAuthContext {
     currentUser?: User | null;
