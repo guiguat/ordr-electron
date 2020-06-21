@@ -18,9 +18,9 @@ interface ISignUpData{
 interface IUpdateData{
     email:string;
     password:string;
-    newName?:string;
-    newEmail?:string;
-    newPassword?:string;
+    newName?:string|null;
+    newEmail?:string|null;
+    newPassword?:string|null;
 }
 
 export const AuthContext = React.createContext<IAuthContext>({} as IAuthContext);
