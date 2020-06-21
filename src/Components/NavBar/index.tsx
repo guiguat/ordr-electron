@@ -7,17 +7,17 @@ const NavBar: React.FC = () => {
     const {LogOut, currentUser} = useContext(AuthContext);
     return (
     
-        <nav className="navbar navbar-dark px-5 row bg-primary">
+        <nav className="navbar navbar-dark px-5 bg-primary">
             <span className="navbar-brand logo-lg mb-0 h1">ORDR.</span>
             <ul className="navbar-nav row mr-auto mt-2 mt-lg-0">
                 <li className="nav-item ml-5">
                     <a className="nav-link" href="/">Home</a>
                 </li>
                 <li className="nav-item ml-3">
-                    <a className="nav-link" href="/product">Product</a>
+                    <a className="nav-link" href="#/product">Product</a>
                 </li>
                 <li className="nav-item ml-3">
-                    <a className="nav-link" href="/users">Users</a>
+                    <a className="nav-link" href="#/users">Users</a>
                 </li>
             </ul>
 
