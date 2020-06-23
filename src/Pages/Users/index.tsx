@@ -15,6 +15,7 @@ const Users: React.FC = () => {
   const [newName, setNewName] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newPwd, setNewPwd] = useState("");
+  const [formType, setFormType] = useState("");
 
   function handleNewUser(event:FormEvent){
     event.preventDefault();
@@ -24,17 +25,12 @@ const Users: React.FC = () => {
       name
     }
     SignUp(data);
-    setName("");
-    setEmail("");
-    setPassword("");
-    setBtnNewUser(false);
+    clear();
   }
 
   function handleDelete(){
     DeleteUser(email, password);
-    setEmail("");
-    setPassword("");
-    setBtnManage(false);
+    clear();
   }
 
   function handleUpdate(){
@@ -46,13 +42,25 @@ const Users: React.FC = () => {
       newPassword: newPwd===""?null:newPwd
     }
     UpdateUser(data);
+    clear();
+  }
+
+  function handleManage(event:any){
+    event.preventDefault();
+    if(formType==="up") handleUpdate();
+    if(formType==="del") handleDelete();
+  }
+
+  function clear(){
     setEmail("");
     setPassword("");
     setNewName("");
     setNewPwd("");
     setNewEmail("");
     setBtnManage(false);
+    setBtnNewUser(false);
   }
+
   return (
       <div className="h-100 p-0 m-0">
         <Navbar/>
@@ -66,25 +74,25 @@ const Users: React.FC = () => {
                   <h2 className="text-dark font-weight-bold mb-3">New User</h2>
                 </div>
                 <div className="col col-md-6">
-                  <button onClick={()=>setBtnNewUser(false)} className="btn float-right">
+                  <button onClick={clear} className="btn float-right">
                     <FiX color="#282A36" size={36} cursor="pointer"/>
                   </button>
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">Name *</label>
                 <input type="text" value={name} required onChange={event=>setName(event.target.value)}
                  className="form-control" id="name"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email address</label>
+                <label htmlFor="email">Email address *</label>
                 <input type="email" value={email} required onChange={event=>setEmail(event.target.value)} 
                  className="form-control" id="email"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Password *</label>
                 <input type="password" value={password} required onChange={event=>setPassword(event.target.value)}
                  className="form-control" id="password"
                 />
@@ -98,49 +106,49 @@ const Users: React.FC = () => {
         {
           btnManage?(
           <div className="container-fluid mx-auto position-absolute p-0 h-100" id="ContainerNewUser">
-            <form onSubmit={event => event.preventDefault()} className="container bg-light p-4 rounded-lg mt-5">
+            <form onSubmit={handleManage} className="container bg-light p-4 rounded-lg mt-5">
               <div className="row">
                 <div className="col col-md-6">
                   <h2 className="text-dark font-weight-bold mb-3">Manage User</h2>
                 </div>
                 <div className="col col-md-6">
-                  <button onClick={()=>setBtnManage(false)} className="btn float-right">
+                  <button onClick={clear} className="btn float-right">
                     <FiX color="#282A36" size={36} cursor="pointer"/>
                   </button>
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email address</label>
+                <label htmlFor="email">Email address *</label>
                 <input type="email" value={email} required onChange={event=>setEmail(event.target.value)} 
                  className="form-control" id="email"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Password *</label>
                 <input type="password" value={password} required onChange={event=>setPassword(event.target.value)}
                  className="form-control" id="password"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="newName">New name (optional)</label>
+                <label htmlFor="newName">New name <span className="text-warning">(optional)</span></label>
                 <input type="text" value={newName} onChange={event=>setNewName(event.target.value)}
                  className="form-control" id="newName"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="newEmail">New Email (optional)</label>
+                <label htmlFor="newEmail">New Email <span className="text-warning">(optional)</span></label>
                 <input type="email" value={newEmail} onChange={event=>setNewEmail(event.target.value)}
                  className="form-control" id="newEmail"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="newPwd">New Password (optional)</label>
+                <label htmlFor="newPwd">New Password <span className="text-warning">(optional)</span></label>
                 <input type="password" value={newPwd} onChange={event=>setNewPwd(event.target.value)}
                  className="form-control" id="newPwd"
                 />
               </div>
-              <button onClick={handleUpdate} className="btn btn-warning mr-3">Update</button>
-              <button onClick={handleDelete} className="btn btn-danger">Delete</button>
+              <button onClick={()=>setFormType("up")} type="submit" className="btn btn-warning mr-3">Update</button>
+              <button onClick={()=>setFormType("del")} type="submit" className="btn btn-danger">Delete</button>
             </form>
           </div>
           ):(<></>)
