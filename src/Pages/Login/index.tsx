@@ -1,13 +1,12 @@
 import React from 'react';
 import { useAuth } from '../../Contexts/Auth';
 import { useHistory, Redirect } from 'react-router';
-import app from '../../services/firebase';
 
 import './loginStyles.scss';
 
 const Login: React.FC = () => {
 
-  const {currentUser} = useAuth();
+  const {currentUser, LogIn} = useAuth();
 
   const history = useHistory();
 
@@ -17,22 +16,8 @@ const Login: React.FC = () => {
 
     const { email, password } = event.target.elements;
 
-    try {
-      
-      await app
-        .auth()
-        .signInWithEmailAndPassword(email.value, password.value)
-        .then(res=>{
-          // changeState();
-          console.log(res);
-        })
-      history.push("/");
-    } catch (error) {
-
-      alert(error);
-
-    }
-
+    LogIn(email.value, password.value);
+    history.push("/");
     
   };
 
@@ -65,9 +50,7 @@ const Login: React.FC = () => {
 
         </div>
 
-        <div className="col p-0 illustration">
-          {/* <Illustration className="illustration float-right"/> */}
-        </div>
+        <div className="col p-0 illustration"/>
 
       </div>
     </div>
