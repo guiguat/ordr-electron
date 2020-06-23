@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../Contexts/Auth';
 import { useHistory, Redirect } from 'react-router';
-import app from '../../firebase';
+import app from '../../services/firebase';
 
 import './loginStyles.scss';
 
