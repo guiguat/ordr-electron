@@ -107,11 +107,10 @@ const Products: React.FC = () => {
                 </ul>
             </header>
             <div className="container bg-white">
-                <table className="table table-sm table-hover">
+                <table className="table table-hover">
                     <caption>List of products</caption>
                     <thead className="thead-dark">
                         <tr>
-                            <th scope="col"></th>
                             <th scope="col">ID</th>
                             <th scope="col" colSpan={2}>Name</th>
                             <th scope="col">Price</th>
@@ -125,17 +124,10 @@ const Products: React.FC = () => {
                                 {
                                     tableData.map(
                                         (product:IProductsData)=>(
-                                            <tr>
-                                                <th scope="row">
-                                                    <input 
-                                                     aria-label="radio button to select an item of the table"
-                                                     type="radio" 
-                                                     onChange={()=>setProdSelected(product)}
-                                                     name="rowItem"
-                                                     id={`${product.id}`}
-                                                    />   
-                                                </th>
-                                                <td>{product.id}</td>
+                                            <tr className={`${prodSelected.id === product.id? "bg-secondary text-white" :""}`}
+                                             onClick={()=>setProdSelected(product)}
+                                            >
+                                                <th scope="row">{product.id}</th>
                                                 <td colSpan={2}>{product.name}</td>
                                                 <td colSpan={product.type===""?1:2}>{product.price}</td>
                                                 <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
