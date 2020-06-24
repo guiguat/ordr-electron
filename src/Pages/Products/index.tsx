@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './Products.scss';
 import NavBar from '../../Components/NavBar';
-import {FiPlus} from 'react-icons/fi';
+import {FiPlus, FiEdit, FiTrash2, FiShoppingBag} from 'react-icons/fi';
 import Create from './Create';
 import { useForms } from '../../Contexts/Forms';
 
@@ -22,25 +22,25 @@ const Products: React.FC = () => {
                             className="btn bg-light shadow-sm text-success"
                             onClick={()=> setBtnClicked("create_products")}
                         >
-                            <FiPlus size={18} color="#FFFFF" className="mb-1"/>
+                            <FiPlus size={18} className="mb-1 mr-2"/>
                             Create
                         </button>
                     </li>
                     <li className="col">
                         <button className="btn bg-light shadow-sm text-warning">
-                            <FiPlus size={18} color="#FFFFF" className="mb-1"/>
+                            <FiEdit size={18} className="mb-1 mr-2"/>
                             Update
                         </button>
                     </li>
                     <li className="col">
                         <button className="btn bg-light shadow-sm text-danger">
-                            <FiPlus size={18} color="#FFFFF" className="mb-1"/>
+                            <FiTrash2 size={18} className="mb-1 mr-2"/>
                             Delete
                         </button>
                     </li>
                     <li className="col">
                         <button className="btn bg-light shadow-sm text-info">
-                            <FiPlus size={18} color="#FFFFF" className="mb-1"/>
+                            <FiShoppingBag size={18} className="mb-1 mr-2"/>
                             Stock
                         </button>
                     </li>
