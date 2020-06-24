@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForms } from '../../Contexts/Forms';
+import { useForms, IProductsData } from '../../Contexts/Forms';
 
 import './Products.scss';
 import { FiFilePlus, FiEdit } from 'react-icons/fi';
@@ -11,14 +11,14 @@ interface ICreateUpdateProps{
 
 const Create: React.FC<ICreateUpdateProps> = (props) => {
 
-    const { setBtnClicked } = useForms();
+    const { setBtnClicked, prodSelected, setProdSelected } = useForms();
     const {Api} = useApi();
 
-    const [id, setId] = useState("");
-    const [Name, setName] = useState("");
-    const [Price, setPrice] = useState("0.00");
-    const [Stock, setStock] = useState("0");
-    const [Dish, setDish] = useState("");
+    const [id, setId] = useState(prodSelected.id?prodSelected.id.toString():"");
+    const [Name, setName] = useState(prodSelected.name?prodSelected.name:"");
+    const [Price, setPrice] = useState(prodSelected.price?prodSelected.price.toString():"0.00");
+    const [Stock, setStock] = useState(prodSelected.stock?prodSelected.stock.toString():"0");
+    const [Dish, setDish] = useState(prodSelected.type?prodSelected.type:"");
 
     async function handleSubmit(event:any){
         event.preventDefault();
@@ -42,6 +42,7 @@ const Create: React.FC<ICreateUpdateProps> = (props) => {
             setStock("");
             setDish("");
             setBtnClicked("");
+            setProdSelected({} as IProductsData);
         }
         catch(error){
             alert("An error occurred when trying to reach the server: \n"+ error);
