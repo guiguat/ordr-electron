@@ -17,7 +17,7 @@ interface IProductsData{
 }
 
 const Products: React.FC = () => {
-    const { btnClicked, setBtnClicked, setProdSelected } = useForms();
+    const { btnClicked, setBtnClicked, setProdSelected, prodSelected } = useForms();
     const {Api} = useApi();
     const [tableData, setTableData] = useState<Array<IProductsData>>([]);
 
@@ -35,6 +35,20 @@ const Products: React.FC = () => {
             setTableData(response.data);
         } catch (error) {
             alert("An error occurred when trying to reach the server:\n"+error);
+        }
+    }
+    
+    async function delProduct(){
+        const answer = window.confirm("Do you really want to delete"+prodSelected.name+"from the database?")
+        if(answer){
+            try {
+
+                const response = await Api.delete(`/product?id=${prodSelected.id}`)
+                alert(response.data.message);
+                
+            } catch (error) {
+                alert("An error occurred when trying to reach the server:\n"+error)
+            }
         }
     }
 
@@ -72,7 +86,7 @@ const Products: React.FC = () => {
                     <li className="col col-md-2">
                         <button
                          className="btn bg-light shadow-sm text-danger"
-                         onClick={()=> setBtnClicked("del_products")}
+                         onClick={delProduct}
                         >
                             <FiTrash2 size={18} className="mb-1 mr-2"/>
                             Delete
