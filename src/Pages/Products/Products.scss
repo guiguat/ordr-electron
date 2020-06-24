@@ -6,3 +6,11 @@ header{
 .onTop{
     background-color: rgba($color: #000000, $alpha: .8);
 }
+thead{
+    tr{
+        cursor:auto;
+    }
+}
+tr{
+    cursor: pointer;
+}

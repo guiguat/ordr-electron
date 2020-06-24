@@ -15,7 +15,7 @@ const Products: React.FC = () => {
     return (
         <>
             <NavBar/>
-            <header className="container-fluid mb-3 position-sticky bg-white p-3 shadow-sm">
+            <header className="container mb-0 position-sticky bg-white p-3">
                 <ul className="row m-0 px-auto">
                     <li className="col">
                         <button 
@@ -46,9 +46,10 @@ const Products: React.FC = () => {
                     </li>
                 </ul>
             </header>
-            <div className="container-fluid bg-white">
-                <table className="table table-hover">
-                    <thead>
+            <div className="container bg-white">
+                <table className="table table-sm table-hover">
+                    <caption>List of products</caption>
+                    <thead className="thead-dark">
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col" colSpan={2}>Name</th>
