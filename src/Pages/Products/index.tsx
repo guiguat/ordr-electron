@@ -6,6 +6,7 @@ import {FiPlus, FiEdit, FiTrash2, FiShoppingBag, FiRefreshCcw} from 'react-icons
 import CreateUpdate from './CreateUpdate';
 import { useForms } from '../../Contexts/Forms';
 import { useApi } from '../../Contexts/Api';
+import Stock from './Stock';
 
 interface IProductsData{
     id: number,
@@ -16,7 +17,7 @@ interface IProductsData{
 }
 
 const Products: React.FC = () => {
-    const { btnClicked, setBtnClicked } = useForms();
+    const { btnClicked, setBtnClicked, setProdSelected } = useForms();
     const {Api} = useApi();
     const [tableData, setTableData] = useState<Array<IProductsData>>([]);
 
@@ -26,7 +27,8 @@ const Products: React.FC = () => {
 
     if(btnClicked === "create_products") return <CreateUpdate type="create"/>
     if(btnClicked === "update_products") return <CreateUpdate type="update"/>
-    
+    if(btnClicked === "stock_products") return <Stock/>
+
     async function getProducts(){
         try {
             const response = await Api.get("/product");
@@ -92,6 +94,7 @@ const Products: React.FC = () => {
                     <caption>List of products</caption>
                     <thead className="thead-dark">
                         <tr>
+                            <th scope="col"></th>
                             <th scope="col">ID</th>
                             <th scope="col" colSpan={2}>Name</th>
                             <th scope="col">Price</th>
@@ -106,7 +109,16 @@ const Products: React.FC = () => {
                                     tableData.map(
                                         (product:IProductsData)=>(
                                             <tr>
-                                                <th scope="row">{product.id}</th>
+                                                <th scope="row">
+                                                    <input 
+                                                     aria-label="radio button to select an item of the table"
+                                                     type="radio" 
+                                                     onChange={()=>setProdSelected(product)}
+                                                     name="rowItem"
+                                                     id={`${product.id}`}
+                                                    />   
+                                                </th>
+                                                <td>{product.id}</td>
                                                 <td colSpan={2}>{product.name}</td>
                                                 <td colSpan={product.type===""?1:2}>{product.price}</td>
                                                 <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
