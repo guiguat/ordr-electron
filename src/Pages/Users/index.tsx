@@ -1,7 +1,6 @@
 import React, {  useState, FormEvent } from 'react';
 import Navbar from '../../Components/NavBar';
 import { useAuth } from '../../Contexts/Auth';
-import {FiX} from 'react-icons/fi'
 
 import './Users.scss';
 
@@ -74,8 +73,8 @@ const Users: React.FC = () => {
                   <h2 className="text-dark font-weight-bold mb-3">New User</h2>
                 </div>
                 <div className="col col-md-6">
-                  <button onClick={clear} className="btn float-right">
-                    <FiX color="#282A36" size={36} cursor="pointer"/>
+                  <button type="button" onClick={clear} className="close mb-4" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
               </div>
@@ -112,8 +111,8 @@ const Users: React.FC = () => {
                   <h2 className="text-dark font-weight-bold mb-3">Manage User</h2>
                 </div>
                 <div className="col col-md-6">
-                  <button onClick={clear} className="btn float-right">
-                    <FiX color="#282A36" size={36} cursor="pointer"/>
+                  <button type="button" onClick={clear} className="close mb-4" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
               </div>
