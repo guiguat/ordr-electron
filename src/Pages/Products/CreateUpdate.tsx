@@ -110,12 +110,12 @@ const Create: React.FC<ICreateUpdateProps> = (props) => {
                             props.type === "create"? (
                                 <>
                                     <FiFilePlus size={18}  className="mr-2 mb-1"/>
-                                    Create product
+                                    Create
                                 </>
                             ):(
                                 <>
                                     <FiEdit size={18}  className="mr-2 mb-1"/>
-                                    Update product
+                                    Update
                                 </>
                             )
                         }
