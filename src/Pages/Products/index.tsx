@@ -3,14 +3,15 @@ import React, { useState } from 'react';
 import './Products.scss';
 import NavBar from '../../Components/NavBar';
 import {FiPlus, FiEdit, FiTrash2, FiShoppingBag} from 'react-icons/fi';
-import Create from './Create';
+import CreateUpdate from './CreateUpdate';
 import { useForms } from '../../Contexts/Forms';
 
 const Products: React.FC = () => {
     
     const { btnClicked, setBtnClicked } = useForms();
 
-    if(btnClicked === "create_products") return <Create/>
+    if(btnClicked === "create_products") return <CreateUpdate type="create"/>
+    if(btnClicked === "update_products") return <CreateUpdate type="update"/>
 
     return (
         <>
