@@ -43,8 +43,11 @@ const Products: React.FC = () => {
         if(answer){
             try {
 
-                const response = await Api.delete(`/product?id=${prodSelected.id}`)
-                alert(response.data.message);
+                if(prodSelected.id){
+                    const response = await Api.delete(`/product?id=${prodSelected.id}`)
+                    alert(response.data.message);
+                }
+                else throw new Error("Please select a product from the table below");
                 
             } catch (error) {
                 alert("An error occurred when trying to reach the server:\n"+error)
