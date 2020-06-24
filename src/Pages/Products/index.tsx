@@ -10,7 +10,7 @@ const Products: React.FC = () => {
     
     const { btnClicked, setBtnClicked } = useForms();
 
-    if(btnClicked === "create") return <Create/>
+    if(btnClicked === "create_products") return <Create/>
 
     return (
         <>
@@ -20,7 +20,7 @@ const Products: React.FC = () => {
                     <li className="col">
                         <button 
                             className="btn bg-light shadow-sm text-success"
-                            onClick={()=> setBtnClicked("create")}
+                            onClick={()=> setBtnClicked("create_products")}
                         >
                             <FiPlus size={18} color="#FFFFF" className="mb-1"/>
                             Create
