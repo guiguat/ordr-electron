@@ -1,18 +1,40 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 
 import './Products.scss';
 import NavBar from '../../Components/NavBar';
 import {FiPlus, FiEdit, FiTrash2, FiShoppingBag} from 'react-icons/fi';
 import CreateUpdate from './CreateUpdate';
 import { useForms } from '../../Contexts/Forms';
+import { useApi } from '../../Contexts/Api';
+
+interface IProductsData{
+    id: number,
+    name: string,
+    price: number,
+    stock: number,
+    type: string
+}
 
 const Products: React.FC = () => {
-    
     const { btnClicked, setBtnClicked } = useForms();
+    const {Api} = useApi();
+    const [tableData, setTableData] = useState<Array<IProductsData>>([]);
+
+    useEffect(()=>{
+        async function getProdutos(){
+            try {
+                const response = await Api.get("/product");
+                setTableData(response.data);
+            } catch (error) {
+                alert("An error occurred when trying to reach the server:\n"+error);
+            }
+        }
+        if(btnClicked === "")getProdutos();
+    },[]);
 
     if(btnClicked === "create_products") return <CreateUpdate type="create"/>
     if(btnClicked === "update_products") return <CreateUpdate type="update"/>
-
+    
     return (
         <>
             <NavBar primary="products"/>
@@ -68,26 +90,25 @@ const Products: React.FC = () => {
                             <th scope="col">Type</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td colSpan={2}>Mark</td>
-                            <td colSpan={2}>20.50</td>
-                            <td>dish</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td colSpan={2}>Jacob</td>
-                            <td>12.05</td>
-                            <td colSpan={2}>143</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colSpan={2}>Larry the Bird</td>
-                            <td colSpan={2}>13.22</td>
-                            <td>dish</td>
-                        </tr>
-                    </tbody>
+                    {
+                        tableData?(
+                            <tbody>
+                                {
+                                    tableData.map(
+                                        (product:IProductsData)=>(
+                                            <tr>
+                                                <th scope="row">{product.id}</th>
+                                                <td colSpan={2}>{product.name}</td>
+                                                <td colSpan={product.type===""?1:2}>{product.price}</td>
+                                                <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
+                                                <td>{product.type===""?"":product.type}</td>
+                                            </tr>
+                                        )
+                                    )
+                                }
+                            </tbody>
+                        ):(<></>)
+                    }
                 </table>
             </div>
         </>
