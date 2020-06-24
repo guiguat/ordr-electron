@@ -7,7 +7,7 @@ interface IFormsContext {
     setProdSelected(product:IProductsData):void
 }
 
-interface IProductsData{
+export interface IProductsData{
     id: number,
     name: string,
     price: number,
