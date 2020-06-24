@@ -4,7 +4,6 @@ import { useForms } from '../../Contexts/Forms';
 import './Products.scss';
 import { FiFilePlus, FiEdit } from 'react-icons/fi';
 import { useApi } from '../../Contexts/Api';
-import Axios from 'axios';
 
 interface ICreateUpdateProps{
     type:string
@@ -13,7 +12,7 @@ interface ICreateUpdateProps{
 const Create: React.FC<ICreateUpdateProps> = (props) => {
 
     const { setBtnClicked } = useForms();
-    const {baseURL} = useApi();
+    const {Api} = useApi();
 
     const [id, setId] = useState("");
     const [Name, setName] = useState("");
@@ -35,8 +34,8 @@ const Create: React.FC<ICreateUpdateProps> = (props) => {
         }
         try{
             const res = props.type==="create"?
-                await Axios.post(`${baseURL}/product`, data)
-                :await Axios.put(`${baseURL}/product`, dataPut);
+                await Api.post("/product", data)
+                :await Api.put("/product", dataPut);
             alert(res.data.message);
             setName("");
             setPrice("");
