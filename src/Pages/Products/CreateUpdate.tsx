@@ -53,7 +53,11 @@ const Create: React.FC<ICreateUpdateProps> = (props) => {
             <form onSubmit={handleSubmit} className="container bg-light p-4 rounded-lg mt-5">
                 <div className="row">
                     <div className="col col-md-6">
-                    <h2 className="text-dark font-weight-bold mb-3">Create Product</h2>
+                    <h2 className="text-dark font-weight-bold mb-3">
+                        {
+                            props.type==="create"?"Create Product":"Update Product"
+                        }
+                    </h2>
                     </div>
                     <div className="col col-md-6">
                     <button type="button" onClick={()=>{setBtnClicked("")}} className="close mb-4" aria-label="Close">
@@ -106,12 +110,12 @@ const Create: React.FC<ICreateUpdateProps> = (props) => {
                             props.type === "create"? (
                                 <>
                                     <FiFilePlus size={18}  className="mr-2 mb-1"/>
-                                    Create Product
+                                    Create product
                                 </>
                             ):(
                                 <>
                                     <FiEdit size={18}  className="mr-2 mb-1"/>
-                                    Edit Product
+                                    Update product
                                 </>
                             )
                         }
