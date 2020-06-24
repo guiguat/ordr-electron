@@ -3,6 +3,7 @@ import { useAuth } from '../../Contexts/Auth';
 import { useHistory, Redirect } from 'react-router';
 
 import './loginStyles.scss';
+import { FiLogIn } from 'react-icons/fi';
 
 const Login: React.FC = () => {
 
@@ -45,7 +46,10 @@ const Login: React.FC = () => {
               <input type="password" name="password" required className="form-control" id="password"/>
             </div>
         
-            <button type="submit" className="btn btn-primary w-100">Login</button>
+            <button type="submit" className="btn btn-primary w-100">
+              <FiLogIn size={18} className="mr-3"/>
+              Login
+            </button>
           </form>
 
         </div>

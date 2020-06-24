@@ -4,6 +4,7 @@ import { useAuth } from '../../Contexts/Auth';
 
 import './Users.scss';
 import { useForms } from '../../Contexts/Forms';
+import { FiEdit, FiUserPlus, FiUserX } from 'react-icons/fi';
 
 const Users: React.FC = () => {
   const {currentUser, SignUp, DeleteUser, UpdateUser} = useAuth();
@@ -95,7 +96,10 @@ const Users: React.FC = () => {
                  className="form-control" id="password"
                 />
               </div>
-              <button type="submit" className="btn btn-primary">Create user</button>
+              <button type="submit" className="btn btn-primary">
+                <FiUserPlus className="mr-2"/>
+                Create user
+              </button>
             </form>
           </div>
           ):(<></>)
@@ -145,8 +149,14 @@ const Users: React.FC = () => {
                  className="form-control" id="newPwd"
                 />
               </div>
-              <button onClick={()=>setFormType("up")} type="submit" className="btn btn-warning mr-3">Update</button>
-              <button onClick={()=>setFormType("del")} type="submit" className="btn btn-danger">Delete</button>
+              <button onClick={()=>setFormType("up")} type="submit" className="btn btn-warning mr-3">
+                <FiEdit className="mr-2"/>
+                Update
+              </button>
+              <button onClick={()=>setFormType("del")} type="submit" className="btn btn-danger">
+                <FiUserX className="mr-2"/>
+                Delete
+              </button>
             </form>
           </div>
           ):(<></>)
@@ -158,9 +168,11 @@ const Users: React.FC = () => {
             <h2 className="text-dark">Name: {currentUser?.displayName}</h2>
             <h2 className="text-dark">Email: {currentUser?.email}</h2>
             <button className="btn btn-primary w-100 mt-5" onClick={()=>setBtnClicked("new_user")}>
+              <FiUserPlus className="mr-3" />
               Register New
             </button>
             <button className="btn btn-warning w-100 mt-3" onClick={()=>setBtnClicked("man_user")}>
+              <FiEdit className="mr-3"/>
               Manage Users
             </button>
           </div>

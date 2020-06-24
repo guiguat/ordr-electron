@@ -2,6 +2,7 @@ import React from 'react';
 import { useAuth } from '../../Contexts/Auth';
 
 import './NavBar.scss';
+import { FiLogOut } from 'react-icons/fi';
 
 const NavBar: React.FC = () => {
     const {LogOut, currentUser} = useAuth();
@@ -27,7 +28,8 @@ const NavBar: React.FC = () => {
              className="btn btn-sm btn-light text-dark my-2 ml-5    my-sm-0"
              onClick={LogOut}
             >
-                LogOut
+            <FiLogOut size={18} className="mr-2"/>
+                Logout
             </button>
         </nav>
   
