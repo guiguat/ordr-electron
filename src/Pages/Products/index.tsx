@@ -22,7 +22,7 @@ const Products: React.FC = () => {
 
     useEffect(()=>{
         if(btnClicked === "")getProducts();
-    },[]);
+    });
 
     if(btnClicked === "create_products") return <CreateUpdate type="create"/>
     if(btnClicked === "update_products") return <CreateUpdate type="update"/>
@@ -110,7 +110,7 @@ const Products: React.FC = () => {
                                                 <td colSpan={2}>{product.name}</td>
                                                 <td colSpan={product.type===""?1:2}>{product.price}</td>
                                                 <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
-                                                <td>{product.type===""?"":product.type}</td>
+                                                <td>{product.type===""?"":product.type.toUpperCase()}</td>
                                             </tr>
                                         )
                                     )
