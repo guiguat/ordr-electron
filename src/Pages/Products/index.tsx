@@ -39,7 +39,7 @@ const Products: React.FC = () => {
     }
     
     async function delProduct(){
-        const answer = window.confirm("Do you really want to delete"+prodSelected.name+"from the database?")
+        const answer = window.confirm("Do you really want to delete "+prodSelected.name+" from the database?")
         if(answer){
             try {
 
