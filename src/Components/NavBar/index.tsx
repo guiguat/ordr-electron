@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth } from '../../Contexts/Auth';
 
 import './NavBar.scss';
-import { FiLogOut } from 'react-icons/fi';
+import { FiLogOut, FiSettings } from 'react-icons/fi';
 
 interface Iprops {
     primary:string;
@@ -26,15 +26,24 @@ const NavBar: React.FC<Iprops> = (props) => {
                 </li>
             </ul>
 
-            <span className="text-white text-sm my-2 my-sm-0">Logged in as {currentUser?.displayName}</span>
-
-            <button 
-             className="btn btn-sm btn-light text-dark my-2 ml-5    my-sm-0"
-             onClick={LogOut}
-            >
-            <FiLogOut size={18} className="mr-2"/>
-                Logout
-            </button>
+            <div className="dropdown">
+                <button className="btn btn-sm text-white my-2 ml-5 my-sm-0 dropdown-toggle"
+                 type="button" id="dropdownMenuButton"
+                 data-toggle="dropdown"
+                 aria-haspopup="true"
+                 aria-expanded="false"
+                >
+                    Hello, {currentUser?.displayName}
+                </button>
+                <div className="dropdown-menu text-right" aria-labelledby="dropdownMenuButton">
+                    <button onClick={LogOut} className="align-items-center d-flex font-weight-bold text-dark dropdown-item">
+                        <FiLogOut size={18} className="mr-2"/> Logout
+                    </button>
+                    <a href="#/config" className="align-items-center font-weight-bold d-flex text-dark dropdown-item">
+                        <FiSettings size={18} className="mr-2"/> Settings
+                    </a>
+                </div>
+            </div>
         </nav>
   
     );
