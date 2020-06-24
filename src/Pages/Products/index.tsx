@@ -27,19 +27,28 @@ const Products: React.FC = () => {
                         </button>
                     </li>
                     <li className="col">
-                        <button className="btn bg-light shadow-sm text-warning">
+                        <button
+                         className="btn bg-light shadow-sm text-warning"
+                         onClick={()=> setBtnClicked("update_products")}
+                         >
                             <FiEdit size={18} className="mb-1 mr-2"/>
                             Update
                         </button>
                     </li>
                     <li className="col">
-                        <button className="btn bg-light shadow-sm text-danger">
+                        <button
+                         className="btn bg-light shadow-sm text-danger"
+                         onClick={()=> setBtnClicked("del_products")}
+                        >
                             <FiTrash2 size={18} className="mb-1 mr-2"/>
                             Delete
                         </button>
                     </li>
                     <li className="col">
-                        <button className="btn bg-light shadow-sm text-info">
+                        <button
+                         className="btn bg-light shadow-sm text-info"
+                         onClick={()=> setBtnClicked("stock_products")}
+                        >
                             <FiShoppingBag size={18} className="mb-1 mr-2"/>
                             Stock
                         </button>
