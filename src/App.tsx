@@ -3,10 +3,13 @@ import Routes from './routes/routes';
 import { AuthProvider } from "./Contexts/Auth";
 
 import "./custom.scss";
+import { FormsProvider } from './Contexts/Forms';
 function App() {
   return (
     <AuthProvider>
-      <Routes />
+      <FormsProvider>
+        <Routes />
+      </FormsProvider>
     </AuthProvider>
   )
 }
