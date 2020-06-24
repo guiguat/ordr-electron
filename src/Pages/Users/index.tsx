@@ -3,11 +3,11 @@ import Navbar from '../../Components/NavBar';
 import { useAuth } from '../../Contexts/Auth';
 
 import './Users.scss';
+import { useForms } from '../../Contexts/Forms';
 
 const Users: React.FC = () => {
   const {currentUser, SignUp, DeleteUser, UpdateUser} = useAuth();
-  const [btnNewUser, setBtnNewUser] = useState(false);
-  const [btnManage, setBtnManage] = useState(false);
+  const {btnClicked, setBtnClicked} = useForms();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -56,8 +56,7 @@ const Users: React.FC = () => {
     setNewName("");
     setNewPwd("");
     setNewEmail("");
-    setBtnManage(false);
-    setBtnNewUser(false);
+    setBtnClicked("");
   }
 
   return (
@@ -65,7 +64,7 @@ const Users: React.FC = () => {
         <Navbar/>
 
         {
-          btnNewUser?(
+          btnClicked==="new_user"?(
           <div className="container-fluid mx-auto position-absolute p-0 h-full" id="ContainerNewUser">
             <form onSubmit={handleNewUser} className="container bg-light p-4 rounded-lg mt-5">
             <div className="row">
@@ -103,7 +102,7 @@ const Users: React.FC = () => {
         } 
 
         {
-          btnManage?(
+          btnClicked==="man_user"?(
           <div className="container-fluid mx-auto position-absolute p-0 h-100" id="ContainerNewUser">
             <form onSubmit={handleManage} className="container bg-light p-4 rounded-lg mt-5">
               <div className="row">
@@ -158,10 +157,10 @@ const Users: React.FC = () => {
             <h1 className="text-dark font-weight-bold mb-3">Current User</h1>
             <h2 className="text-dark">Name: {currentUser?.displayName}</h2>
             <h2 className="text-dark">Email: {currentUser?.email}</h2>
-            <button className="btn btn-primary w-100 mt-5" onClick={()=>setBtnNewUser(true)}>
+            <button className="btn btn-primary w-100 mt-5" onClick={()=>setBtnClicked("new_user")}>
               Register New
             </button>
-            <button className="btn btn-warning w-100 mt-3" onClick={()=>setBtnManage(true)}>
+            <button className="btn btn-warning w-100 mt-3" onClick={()=>setBtnClicked("man_user")}>
               Manage Users
             </button>
           </div>
