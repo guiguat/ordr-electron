@@ -62,7 +62,7 @@ const Users: React.FC = () => {
 
   return (
       <div className="h-100 p-0 m-0">
-        <Navbar/>
+        <Navbar primary="users"/>
 
         {
           btnClicked==="new_user"?(

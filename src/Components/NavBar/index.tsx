@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { Props } from 'react';
 import { useAuth } from '../../Contexts/Auth';
 
 import './NavBar.scss';
 import { FiLogOut } from 'react-icons/fi';
 
-const NavBar: React.FC = () => {
+interface Iprops {
+    primary:string;
+}
+
+const NavBar: React.FC<Iprops> = (props) => {
     const {LogOut, currentUser} = useAuth();
     return (
     
         <nav className="navbar navbar-dark px-5 bg-primary">
             <span className="navbar-brand logo-lg mb-0 h1">ORDR.</span>
             <ul className="navbar-nav row mr-auto mt-2 mt-lg-0">
-                <li className="nav-item ml-5">
+                <li className={`nav-item ml-5 ${props.primary === 'home'?'active':''}`}>
                     <a className="nav-link" href="#/">Home</a>
                 </li>
-                <li className="nav-item ml-3">
+                <li className={`nav-item ml-3 ${props.primary === 'products'?'active':''}`}>
                     <a className="nav-link" href="#/products">Products</a>
                 </li>
-                <li className="nav-item ml-3">
+                <li className={`nav-item ml-3 ${props.primary === 'users'?'active':''}`}>
                     <a className="nav-link" href="#/users">Users</a>
                 </li>
             </ul>

@@ -14,7 +14,7 @@ const Products: React.FC = () => {
 
     return (
         <>
-            <NavBar/>
+            <NavBar primary="products"/>
             <header className="container mb-0 position-sticky bg-white p-3">
                 <ul className="row m-0 px-auto">
                     <li className="col">
