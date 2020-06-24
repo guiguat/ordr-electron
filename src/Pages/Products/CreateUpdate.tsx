@@ -44,7 +44,7 @@ const Create: React.FC<ICreateUpdateProps> = (props) => {
             setBtnClicked("");
         }
         catch(error){
-            alert("An error happened when connecting to the server: \n"+ error);
+            alert("An error occurred when trying to reach the server: \n"+ error);
         }
     }
 
