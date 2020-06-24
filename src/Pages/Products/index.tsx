@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import './Products.scss';
 import NavBar from '../../Components/NavBar';
-import {FiPlus, FiEdit, FiTrash2, FiShoppingBag} from 'react-icons/fi';
+import {FiPlus, FiEdit, FiTrash2, FiShoppingBag, FiRefreshCcw} from 'react-icons/fi';
 import CreateUpdate from './CreateUpdate';
 import { useForms } from '../../Contexts/Forms';
 import { useApi } from '../../Contexts/Api';
@@ -21,26 +21,35 @@ const Products: React.FC = () => {
     const [tableData, setTableData] = useState<Array<IProductsData>>([]);
 
     useEffect(()=>{
-        async function getProdutos(){
-            try {
-                const response = await Api.get("/product");
-                setTableData(response.data);
-            } catch (error) {
-                alert("An error occurred when trying to reach the server:\n"+error);
-            }
-        }
-        if(btnClicked === "")getProdutos();
+        if(btnClicked === "")getProducts();
     },[]);
 
     if(btnClicked === "create_products") return <CreateUpdate type="create"/>
     if(btnClicked === "update_products") return <CreateUpdate type="update"/>
     
+    async function getProducts(){
+        try {
+            const response = await Api.get("/product");
+            setTableData(response.data);
+        } catch (error) {
+            alert("An error occurred when trying to reach the server:\n"+error);
+        }
+    }
+
     return (
         <>
             <NavBar primary="products"/>
             <header className="container mb-0 position-sticky bg-white p-3">
                 <ul className="row m-0 px-auto">
-                    <li className="col">
+                    <li className="col col-md-1">
+                        <button 
+                            className="btn bg-light shadow-sm text-success"
+                            onClick={getProducts}
+                        >
+                            <FiRefreshCcw size={18}/>
+                        </button>
+                    </li>
+                    <li className="col col-md-2">
                         <button 
                             className="btn bg-light shadow-sm text-success"
                             onClick={()=> setBtnClicked("create_products")}
@@ -49,7 +58,7 @@ const Products: React.FC = () => {
                             Create
                         </button>
                     </li>
-                    <li className="col">
+                    <li className="col col-md-2">
                         <button
                          className="btn bg-light shadow-sm text-warning"
                          onClick={()=> setBtnClicked("update_products")}
@@ -58,7 +67,7 @@ const Products: React.FC = () => {
                             Update
                         </button>
                     </li>
-                    <li className="col">
+                    <li className="col col-md-2">
                         <button
                          className="btn bg-light shadow-sm text-danger"
                          onClick={()=> setBtnClicked("del_products")}
@@ -67,7 +76,7 @@ const Products: React.FC = () => {
                             Delete
                         </button>
                     </li>
-                    <li className="col">
+                    <li className="col col-md-2">
                         <button
                          className="btn bg-light shadow-sm text-info"
                          onClick={()=> setBtnClicked("stock_products")}
