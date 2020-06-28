@@ -48,6 +48,7 @@ const Report: React.FC = () => {
                 <NavBar primary="report"/>
             </div>
             <div className="col col-md-10  h-100">
+                <h1 className="mb-1 mt-3 pl-3">Report</h1>
                 <header className="container mb-0 position-sticky bg-white p-3">
                     <ul className="row m-0 px-auto">
                         <li className="col col-md-1">

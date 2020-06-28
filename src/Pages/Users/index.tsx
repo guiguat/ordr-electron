@@ -160,22 +160,22 @@ return (
             <NavBar primary="home"/>
         </div>
         <div className="col col-md-10  h-100">
-
-        <div className="container-fluid ">
-            <div className="container bg-light rounded-lg p-5 mt-5">
-                <h1 className="text-dark font-weight-bold mb-3">Current User</h1>
-                <h2 className="text-dark">Name: {currentUser?.displayName}</h2>
-                <h2 className="text-dark">Email: {currentUser?.email}</h2>
-                <button className="btn btn-primary w-100 mt-5" onClick={()=>setBtnClicked("new_user")}>
-                    <FiUserPlus className="mr-3" />
-                    Register New
-                </button>
-                <button className="btn btn-warning w-100 mt-3" onClick={()=>setBtnClicked("man_user")}>
-                    <FiEdit className="mr-3"/>
-                    Manage Users
-                </button>
+            <div className="container-fluid ">
+                <h1 className="mt-3">Users</h1>
+                <div className="container bg-light rounded-lg p-5 mt-5">
+                    <h2 className="text-dark font-weight-bold mb-3">Current User</h2>
+                    <h3 className="text-dark">Name: {currentUser?.displayName}</h3>
+                    <h3 className="text-dark">Email: {currentUser?.email}</h3>
+                    <button className="btn btn-primary w-100 mt-5" onClick={()=>setBtnClicked("new_user")}>
+                        <FiUserPlus className="mr-3" />
+                        Register New
+                    </button>
+                    <button className="btn btn-warning w-100 mt-3" onClick={()=>setBtnClicked("man_user")}>
+                        <FiEdit className="mr-3"/>
+                        Manage Users
+                    </button>
+                </div>
             </div>
-        </div>
         </div>
     </div>
 );
