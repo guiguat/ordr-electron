@@ -56,93 +56,97 @@ const Products: React.FC = () => {
     }
 
     return (
-        <>
-            <NavBar primary="products"/>
-            <header className="container mb-0 position-sticky bg-white p-3">
-                <ul className="row m-0 px-auto">
-                    <li className="col col-md-1">
-                        <button 
-                            className="btn bg-light shadow-sm text-success"
-                            onClick={getProducts}
-                        >
-                            <FiRefreshCcw size={18}/>
-                        </button>
-                    </li>
-                    <li className="col col-md-2">
-                        <button 
-                            className="btn bg-light shadow-sm text-success"
-                            onClick={()=> setBtnClicked("create_products")}
-                        >
-                            <FiPlus size={18} className="mb-1 mr-2"/>
-                            Create
-                        </button>
-                    </li>
-                    <li className="col col-md-2">
-                        <button
-                         className="btn bg-light shadow-sm text-warning"
-                         onClick={()=> setBtnClicked("update_products")}
-                         >
-                            <FiEdit size={18} className="mb-1 mr-2"/>
-                            Update
-                        </button>
-                    </li>
-                    <li className="col col-md-2">
-                        <button
-                         className="btn bg-light shadow-sm text-danger"
-                         onClick={delProduct}
-                        >
-                            <FiTrash2 size={18} className="mb-1 mr-2"/>
-                            Delete
-                        </button>
-                    </li>
-                    <li className="col col-md-2">
-                        <button
-                         className="btn bg-light shadow-sm text-info"
-                         onClick={()=> setBtnClicked("stock_products")}
-                        >
-                            <FiShoppingBag size={18} className="mb-1 mr-2"/>
-                            Stock
-                        </button>
-                    </li>
-                </ul>
-            </header>
-            <div className="container bg-white">
-                <table className="table table-hover">
-                    <caption>List of products</caption>
-                    <thead className="thead-dark">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col" colSpan={2}>Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Type</th>
-                        </tr>
-                    </thead>
-                    {
-                        tableData?(
-                            <tbody>
-                                {
-                                    tableData.map(
-                                        (product:IProductsData)=>(
-                                            <tr className={`${prodSelected.id === product.id? "bg-secondary text-white" :""}`}
-                                             onClick={()=>setProdSelected(product)}
-                                             key={product.id}
-                                            >
-                                                <th scope="row">{product.id}</th>
-                                                <td colSpan={2}>{product.name}</td>
-                                                <td colSpan={product.type===""?1:2}>{product.price}</td>
-                                                <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
-                                                <td>{product.type===""?"":product.type.toUpperCase()}</td>
-                                            </tr>
-                                        )
-                                    )
-                                }
-                            </tbody>
-                        ):(<></>)
-                    }
-                </table>
+        <div className="row m-0 p-0 d-flex h-100 w-100">
+            <div className="col col-md-2 h-100 p-0">
+                <NavBar primary="products"/>
             </div>
-        </>
+            <div className="col col-md-10  h-100">
+                <header className="container mb-0 position-sticky bg-white p-3">
+                    <ul className="row m-0 px-auto">
+                        <li className="col col-md-1">
+                            <button 
+                                className="btn bg-light shadow-sm text-success"
+                                onClick={getProducts}
+                            >
+                                <FiRefreshCcw size={18}/>
+                            </button>
+                        </li>
+                        <li className="col col-md-2">
+                            <button 
+                                className="btn bg-light shadow-sm text-success"
+                                onClick={()=> setBtnClicked("create_products")}
+                            >
+                                <FiPlus size={18} className="mb-1 mr-2"/>
+                                Create
+                            </button>
+                        </li>
+                        <li className="col col-md-2">
+                            <button
+                            className="btn bg-light shadow-sm text-warning"
+                            onClick={()=> setBtnClicked("update_products")}
+                            >
+                                <FiEdit size={18} className="mb-1 mr-2"/>
+                                Update
+                            </button>
+                        </li>
+                        <li className="col col-md-2">
+                            <button
+                            className="btn bg-light shadow-sm text-danger"
+                            onClick={delProduct}
+                            >
+                                <FiTrash2 size={18} className="mb-1 mr-2"/>
+                                Delete
+                            </button>
+                        </li>
+                        <li className="col col-md-2">
+                            <button
+                            className="btn bg-light shadow-sm text-info"
+                            onClick={()=> setBtnClicked("stock_products")}
+                            >
+                                <FiShoppingBag size={18} className="mb-1 mr-2"/>
+                                Stock
+                            </button>
+                        </li>
+                    </ul>
+                </header>
+                <div className="container bg-white">
+                    <table className="table table-hover">
+                        <caption>List of products</caption>
+                        <thead className="thead-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col" colSpan={2}>Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Type</th>
+                            </tr>
+                        </thead>
+                        {
+                            tableData?(
+                                <tbody>
+                                    {
+                                        tableData.map(
+                                            (product:IProductsData)=>(
+                                                <tr className={`${prodSelected.id === product.id? "bg-secondary text-white" :""}`}
+                                                onClick={()=>setProdSelected(product)}
+                                                key={product.id}
+                                                >
+                                                    <th scope="row">{product.id}</th>
+                                                    <td colSpan={2}>{product.name}</td>
+                                                    <td colSpan={product.type===""?1:2}>{product.price}</td>
+                                                    <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
+                                                    <td>{product.type===""?"":product.type.toUpperCase()}</td>
+                                                </tr>
+                                            )
+                                        )
+                                    }
+                                </tbody>
+                            ):(<></>)
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
     );
 }
 

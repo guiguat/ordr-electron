@@ -2,14 +2,14 @@ import React from 'react';
 import { useAuth } from '../../Contexts/Auth';
 
 import './NavBar.scss';
-import { FiLogOut, FiSettings } from 'react-icons/fi';
+import { FiSettings } from 'react-icons/fi';
 
 interface Iprops {
     primary:string;
 }
 
 const NavBar: React.FC<Iprops> = (props) => {
-    const {LogOut, currentUser} = useAuth();
+
     return (
     
         <nav className="navbar navbar-dark px-0 py-3 bg-primary w-100 h-100">

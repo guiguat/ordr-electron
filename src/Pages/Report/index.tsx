@@ -43,63 +43,67 @@ const Report: React.FC = () => {
     }
 
     return (  
-        <>
-            <NavBar primary="report"/>
-            <header className="container mb-0 position-sticky bg-white p-3">
-                <ul className="row m-0 px-auto">
-                    <li className="col col-md-1">
-                        <button 
-                            className="btn bg-light shadow-sm text-success"
-                            onClick={getReports}
-                        >
-                            <FiRefreshCcw size={18}/>
-                        </button>
-                    </li>
-                    <li className="col col-md-2">
-                        <button 
-                            className="btn bg-light shadow-sm text-success"
-                            onClick={openReport}
-                        >
-                            <FiFilePlus size={18} className="mb-1 mr-2"/>
-                            Open new
-                        </button>
-                    </li>
-                </ul>
-            </header>
-            <div className="container bg-white">
-                <table className="table">
-                    <caption>List of reports</caption>
-                    <thead className="thead-dark">
-                        <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Debit</th>
-                            <th scope="col">Credit</th>
-                            <th scope="col">Cash</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                    </thead>
-                    {
-                        reportData?(
-                            <tbody>
-                                {
-                                    reportData.map(
-                                        (report:IReportData)=>(
-                                            <tr key={report.id}>
-                                                <th scope="row">{report.dateTime}</th>
-                                                <td>{report.debit}</td>
-                                                <td>{report.credit}</td>
-                                                <td>{report.cash}</td>
-                                                <td>{report.total}</td>
-                                            </tr>
-                                        )
-                                    )
-                                }
-                            </tbody>
-                        ):(<></>)
-                    }
-                </table>
+        <div className="row m-0 p-0 d-flex h-100 w-100">
+            <div className="col col-md-2 h-100 p-0">
+                <NavBar primary="report"/>
             </div>
-        </>
+            <div className="col col-md-10  h-100">
+                <header className="container mb-0 position-sticky bg-white p-3">
+                    <ul className="row m-0 px-auto">
+                        <li className="col col-md-1">
+                            <button 
+                                className="btn bg-light shadow-sm text-success"
+                                onClick={getReports}
+                            >
+                                <FiRefreshCcw size={18}/>
+                            </button>
+                        </li>
+                        <li className="col col-md-2">
+                            <button 
+                                className="btn bg-light shadow-sm text-success"
+                                onClick={openReport}
+                            >
+                                <FiFilePlus size={18} className="mb-1 mr-2"/>
+                                Open new
+                            </button>
+                        </li>
+                    </ul>
+                </header>
+                <div className="container bg-white">
+                    <table className="table">
+                        <caption>List of reports</caption>
+                        <thead className="thead-dark">
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Debit</th>
+                                <th scope="col">Credit</th>
+                                <th scope="col">Cash</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        {
+                            reportData?(
+                                <tbody>
+                                    {
+                                        reportData.map(
+                                            (report:IReportData)=>(
+                                                <tr key={report.id}>
+                                                    <th scope="row">{report.dateTime}</th>
+                                                    <td>{report.debit}</td>
+                                                    <td>{report.credit}</td>
+                                                    <td>{report.cash}</td>
+                                                    <td>{report.total}</td>
+                                                </tr>
+                                            )
+                                        )
+                                    }
+                                </tbody>
+                            ):(<></>)
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
     );
 }
 
