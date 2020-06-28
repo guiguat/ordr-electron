@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAuth } from '../../Contexts/Auth';
 
 import './NavBar.scss';
 import { FiSettings } from 'react-icons/fi';
