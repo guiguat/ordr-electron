@@ -157,7 +157,7 @@ if(btnClicked==="man_user") return (
 return (
     <div className="row m-0 p-0 d-flex h-100 w-100">
         <div className="col col-md-2 h-100 p-0">
-            <NavBar primary="home"/>
+            <NavBar primary="user"/>
         </div>
         <div className="col col-md-10  h-100">
             <div className="container-fluid ">

@@ -5,8 +5,8 @@ import { useAuth } from '../Contexts/Auth';
 import Login from '../Pages/Login';
 import PrivateRoute from './PrivateRoute';
 import Home from '../Pages/Home';
-import Users from '../Pages/Users';
-import Products from '../Pages/Products';
+import User from '../Pages/User';
+import Product from '../Pages/Product';
 import Report from '../Pages/Report';
 
 import "../custom.scss";
@@ -27,16 +27,16 @@ const Routes: React.FC = () =>{
 
                 <PrivateRoute
                  isAuth={!!currentUser}
-                 path="/users"
+                 path="/user"
                  redirectPath="/login"
-                 component={Users}
+                 component={User}
                 />
                 
                 <PrivateRoute
                  isAuth={!!currentUser}
                  path="/product"
                  redirectPath="/login"
-                 component={Products}
+                 component={Product}
                 />
 
                 <PrivateRoute

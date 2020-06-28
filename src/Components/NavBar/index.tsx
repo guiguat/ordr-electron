@@ -23,8 +23,8 @@ const NavBar: React.FC<Iprops> = (props) => {
                 <li className={`nav-item ${props.primary === 'report'?'active':''}`}>
                     <a className="nav-link" href="#/report">Report</a>
                 </li>
-                <li className={`nav-item ${props.primary === 'users'?'active':''}`}>
-                    <a className="nav-link" href="#/users">Users</a>
+                <li className={`nav-item ${props.primary === 'user'?'active':''}`}>
+                    <a className="nav-link" href="#/user">User</a>
                 </li>
             </ul>
 
