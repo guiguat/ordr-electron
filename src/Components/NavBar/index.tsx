@@ -12,25 +12,28 @@ const NavBar: React.FC<Iprops> = (props) => {
     const {LogOut, currentUser} = useAuth();
     return (
     
-        <nav className="navbar navbar-dark px-5 bg-primary">
+        <nav className="navbar navbar-dark px-0 py-3 bg-primary w-100 h-100">
             <span className="navbar-brand logo-lg mb-0 h1">ORDR.</span>
-            <ul className="navbar-nav row mr-auto mt-2 mt-lg-0">
-                <li className={`nav-item ml-5 ${props.primary === 'home'?'active':''}`}>
+            <ul className="navbar-nav">
+                <li className={`nav-item ${props.primary === 'home'?'active':''}`}>
                     <a className="nav-link" href="#/">Home</a>
                 </li>
-                <li className={`nav-item ml-3 ${props.primary === 'products'?'active':''}`}>
+                <li className={`nav-item ${props.primary === 'products'?'active':''}`}>
                     <a className="nav-link" href="#/products">Products</a>
                 </li>
-                <li className={`nav-item ml-3 ${props.primary === 'report'?'active':''}`}>
+                <li className={`nav-item ${props.primary === 'report'?'active':''}`}>
                     <a className="nav-link" href="#/report">Report</a>
                 </li>
-                <li className={`nav-item ml-3 ${props.primary === 'users'?'active':''}`}>
+                <li className={`nav-item ${props.primary === 'users'?'active':''}`}>
                     <a className="nav-link" href="#/users">Users</a>
                 </li>
             </ul>
 
-            <div className="dropdown">
-                <button className="btn btn-sm text-white my-2 ml-5 my-sm-0 dropdown-toggle"
+            <a href="#/config" className="text-light nav-link">
+                        <FiSettings size={18} className="mr-2"/> Settings
+                    </a>
+            {/* <div className="dropdown">
+                <button className="btn btn-sm text-white dropdown-toggle"
                  type="button" id="dropdownMenuButton"
                  data-toggle="dropdown"
                  aria-haspopup="true"
@@ -46,7 +49,7 @@ const NavBar: React.FC<Iprops> = (props) => {
                         <FiSettings size={18} className="mr-2"/> Settings
                     </a>
                 </div>
-            </div>
+            </div> */}
         </nav>
   
     );

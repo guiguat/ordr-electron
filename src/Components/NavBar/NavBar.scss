@@ -1,6 +1,4 @@
-.row{
-    justify-content: space-around!important;
-    flex-direction: row!important;
-    align-items: center!important;
-    
+.navbar{
+    display: flex;
+    flex-direction: column;
 }
