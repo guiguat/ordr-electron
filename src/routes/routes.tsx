@@ -34,7 +34,7 @@ const Routes: React.FC = () =>{
                 
                 <PrivateRoute
                  isAuth={!!currentUser}
-                 path="/products"
+                 path="/product"
                  redirectPath="/login"
                  component={Products}
                 />
