@@ -126,6 +126,7 @@ const Products: React.FC = () => {
                                         (product:IProductsData)=>(
                                             <tr className={`${prodSelected.id === product.id? "bg-secondary text-white" :""}`}
                                              onClick={()=>setProdSelected(product)}
+                                             key={product.id}
                                             >
                                                 <th scope="row">{product.id}</th>
                                                 <td colSpan={2}>{product.name}</td>
