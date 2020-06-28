@@ -63,38 +63,38 @@ function clear(){
 if(btnClicked==="new_user") return (
     <div className="container-fluid mx-auto position-absolute p-0 h-100" id="ContainerNewUser">
         <form onSubmit={handleNewUser} className="container bg-light p-4 rounded-lg mt-5">
-        <div className="row">
-            <div className="col col-md-6">
-            <h2 className="text-dark font-weight-bold mb-3">New User</h2>
+            <div className="row">
+                <div className="col col-md-6">
+                <h2 className="text-dark font-weight-bold mb-3">New User</h2>
+                </div>
+                <div className="col col-md-6">
+                <button type="button" onClick={clear} className="close mb-4" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
             </div>
-            <div className="col col-md-6">
-            <button type="button" onClick={clear} className="close mb-4" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+            <div className="form-group">
+                <label htmlFor="name">Name *</label>
+                <input type="text" value={name} required onChange={event=>setName(event.target.value)}
+                className="form-control" id="name"
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="email">Email address *</label>
+                <input type="email" value={email} required onChange={event=>setEmail(event.target.value)} 
+                className="form-control" id="email"
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="password">Password *</label>
+                <input type="password" value={password} required onChange={event=>setPassword(event.target.value)}
+                className="form-control" id="password"
+                />
+            </div>
+            <button type="submit" className="btn btn-primary">
+                <FiUserPlus className="mr-2"/>
+                Create user
             </button>
-            </div>
-        </div>
-        <div className="form-group">
-            <label htmlFor="name">Name *</label>
-            <input type="text" value={name} required onChange={event=>setName(event.target.value)}
-            className="form-control" id="name"
-            />
-        </div>
-        <div className="form-group">
-            <label htmlFor="email">Email address *</label>
-            <input type="email" value={email} required onChange={event=>setEmail(event.target.value)} 
-            className="form-control" id="email"
-            />
-        </div>
-        <div className="form-group">
-            <label htmlFor="password">Password *</label>
-            <input type="password" value={password} required onChange={event=>setPassword(event.target.value)}
-            className="form-control" id="password"
-            />
-        </div>
-        <button type="submit" className="btn btn-primary">
-            <FiUserPlus className="mr-2"/>
-            Create user
-        </button>
         </form>
     </div>
 )
@@ -102,54 +102,54 @@ if(btnClicked==="new_user") return (
 if(btnClicked==="man_user") return (
     <div className="container-fluid mx-auto position-absolute p-0 h-100" id="ContainerNewUser">
         <form onSubmit={handleManage} className="container bg-light p-4 rounded-lg mt-5">
-        <div className="row">
-            <div className="col col-md-6">
-            <h2 className="text-dark font-weight-bold mb-3">Manage User</h2>
+            <div className="row">
+                <div className="col col-md-6">
+                <h2 className="text-dark font-weight-bold mb-3">Manage User</h2>
+                </div>
+                <div className="col col-md-6">
+                <button type="button" onClick={clear} className="close mb-4" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
             </div>
-            <div className="col col-md-6">
-            <button type="button" onClick={clear} className="close mb-4" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+            <div className="form-group">
+                <label htmlFor="email">Email address *</label>
+                <input type="email" value={email} required onChange={event=>setEmail(event.target.value)} 
+                className="form-control" id="email"
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="password">Password *</label>
+                <input type="password" value={password} required onChange={event=>setPassword(event.target.value)}
+                className="form-control" id="password"
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="newName">New name <span className="text-warning">(optional)</span></label>
+                <input type="text" value={newName} onChange={event=>setNewName(event.target.value)}
+                className="form-control" id="newName"
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="newEmail">New Email <span className="text-warning">(optional)</span></label>
+                <input type="email" value={newEmail} onChange={event=>setNewEmail(event.target.value)}
+                className="form-control" id="newEmail"
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="newPwd">New Password <span className="text-warning">(optional)</span></label>
+                <input type="password" value={newPwd} onChange={event=>setNewPwd(event.target.value)}
+                className="form-control" id="newPwd"
+                />
+            </div>
+            <button onClick={()=>setFormType("up")} type="submit" className="btn btn-warning mr-3">
+                <FiEdit className="mr-2"/>
+                Update
             </button>
-            </div>
-        </div>
-        <div className="form-group">
-            <label htmlFor="email">Email address *</label>
-            <input type="email" value={email} required onChange={event=>setEmail(event.target.value)} 
-            className="form-control" id="email"
-            />
-        </div>
-        <div className="form-group">
-            <label htmlFor="password">Password *</label>
-            <input type="password" value={password} required onChange={event=>setPassword(event.target.value)}
-            className="form-control" id="password"
-            />
-        </div>
-        <div className="form-group">
-            <label htmlFor="newName">New name <span className="text-warning">(optional)</span></label>
-            <input type="text" value={newName} onChange={event=>setNewName(event.target.value)}
-            className="form-control" id="newName"
-            />
-        </div>
-        <div className="form-group">
-            <label htmlFor="newEmail">New Email <span className="text-warning">(optional)</span></label>
-            <input type="email" value={newEmail} onChange={event=>setNewEmail(event.target.value)}
-            className="form-control" id="newEmail"
-            />
-        </div>
-        <div className="form-group">
-            <label htmlFor="newPwd">New Password <span className="text-warning">(optional)</span></label>
-            <input type="password" value={newPwd} onChange={event=>setNewPwd(event.target.value)}
-            className="form-control" id="newPwd"
-            />
-        </div>
-        <button onClick={()=>setFormType("up")} type="submit" className="btn btn-warning mr-3">
-            <FiEdit className="mr-2"/>
-            Update
-        </button>
-        <button onClick={()=>setFormType("del")} type="submit" className="btn btn-danger">
-            <FiUserX className="mr-2"/>
-            Delete
-        </button>
+            <button onClick={()=>setFormType("del")} type="submit" className="btn btn-danger">
+                <FiUserX className="mr-2"/>
+                Delete
+            </button>
         </form>
     </div>
 )
