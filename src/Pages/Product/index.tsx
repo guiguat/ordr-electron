@@ -62,8 +62,8 @@ const Products: React.FC = () => {
                 <NavBar primary="product"/>
             </Col>
             <Col>
-                <h1 className="mb-2 mt-3 pl-3">Product</h1>
-                <header className="container mb-0 position-sticky bg-white p-3">
+                <h1 className="mb-2">Product</h1>
+                <header className="container mb-0 position-sticky bg-white py-3">
                     <ul className="row m-0 px-auto">
                         <li className="col col-md-1">
                             <button 
@@ -111,42 +111,40 @@ const Products: React.FC = () => {
                         </li>
                     </ul>
                 </header>
-                <div className="container bg-white">
-                    <table className="table table-hover">
-                        <caption>List of products</caption>
-                        <thead className="thead-dark">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col" colSpan={2}>Name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Stock</th>
-                                <th scope="col">Type</th>
-                            </tr>
-                        </thead>
-                        {
-                            tableData?(
-                                <tbody>
-                                    {
-                                        tableData.map(
-                                            (product:IProductsData)=>(
-                                                <tr className={`${prodSelected.id === product.id? "bg-secondary text-white" :""}`}
-                                                onClick={()=>setProdSelected(product)}
-                                                key={product.id}
-                                                >
-                                                    <th scope="row">{product.id}</th>
-                                                    <td colSpan={2}>{product.name}</td>
-                                                    <td colSpan={product.type===""?1:2}>{product.price}</td>
-                                                    <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
-                                                    <td>{product.type===""?"":product.type.toUpperCase()}</td>
-                                                </tr>
-                                            )
+                <table className="table table-hover">
+                    <caption>List of products</caption>
+                    <thead className="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col" colSpan={2}>Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Type</th>
+                        </tr>
+                    </thead>
+                    {
+                        tableData?(
+                            <tbody>
+                                {
+                                    tableData.map(
+                                        (product:IProductsData)=>(
+                                            <tr className={`${prodSelected.id === product.id? "bg-secondary text-white" :""}`}
+                                            onClick={()=>setProdSelected(product)}
+                                            key={product.id}
+                                            >
+                                                <th scope="row">{product.id}</th>
+                                                <td colSpan={2}>{product.name}</td>
+                                                <td colSpan={product.type===""?1:2}>{product.price}</td>
+                                                <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
+                                                <td>{product.type===""?"":product.type.toUpperCase()}</td>
+                                            </tr>
                                         )
-                                    }
-                                </tbody>
-                            ):(<></>)
-                        }
-                    </table>
-                </div>
+                                    )
+                                }
+                            </tbody>
+                        ):(<></>)
+                    }
+                </table>
             </Col>
         </Container>
     );

@@ -50,8 +50,8 @@ const Report: React.FC = () => {
                 <NavBar primary="report"/>
             </Col>
             <Col>
-                <h1 className="mb-1 mt-3 pl-3">Report</h1>
-                <header className="container mb-0 position-sticky bg-white p-3">
+                <h1 className="mb-1">Report</h1>
+                <header className="container mb-0 position-sticky bg-white py-3">
                     <ul className="row m-0 px-auto">
                         <li className="col col-md-1">
                             <button 
@@ -72,39 +72,37 @@ const Report: React.FC = () => {
                         </li>
                     </ul>
                 </header>
-                <div className="container bg-white">
-                    <table className="table">
-                        <caption>List of reports</caption>
-                        <thead className="thead-dark">
-                            <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Debit</th>
-                                <th scope="col">Credit</th>
-                                <th scope="col">Cash</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        {
-                            reportData?(
-                                <tbody>
-                                    {
-                                        reportData.map(
-                                            (report:IReportData)=>(
-                                                <tr key={report.id}>
-                                                    <th scope="row">{report.dateTime}</th>
-                                                    <td>{report.debit}</td>
-                                                    <td>{report.credit}</td>
-                                                    <td>{report.cash}</td>
-                                                    <td>{report.total}</td>
-                                                </tr>
-                                            )
+                <table className="table">
+                    <caption>List of reports</caption>
+                    <thead className="thead-dark">
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Debit</th>
+                            <th scope="col">Credit</th>
+                            <th scope="col">Cash</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    {
+                        reportData?(
+                            <tbody>
+                                {
+                                    reportData.map(
+                                        (report:IReportData)=>(
+                                            <tr key={report.id}>
+                                                <th scope="row">{report.dateTime}</th>
+                                                <td>{report.debit}</td>
+                                                <td>{report.credit}</td>
+                                                <td>{report.cash}</td>
+                                                <td>{report.total}</td>
+                                            </tr>
                                         )
-                                    }
-                                </tbody>
-                            ):(<></>)
-                        }
-                    </table>
-                </div>
+                                    )
+                                }
+                            </tbody>
+                        ):(<></>)
+                    }
+                </table>
             </Col>
         </Container>
     );
