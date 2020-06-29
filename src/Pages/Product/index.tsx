@@ -7,7 +7,8 @@ import CreateUpdate from './CreateUpdate';
 import { useForms } from '../../Contexts/Forms';
 import { useApi } from '../../Contexts/Api';
 import Stock from './Stock';
-
+import Container from '../../Components/Container';
+import Col from '../../Components/Col';
 interface IProductsData{
     id: number,
     name: string,
@@ -56,11 +57,11 @@ const Products: React.FC = () => {
     }
 
     return (
-        <div className="row m-0 p-0 d-flex h-100 w-100">
-            <div className="col col-md-2 h-100 p-0">
+        <Container>
+            <Col type="nav">
                 <NavBar primary="product"/>
-            </div>
-            <div className="col col-md-10  h-100">
+            </Col>
+            <Col>
                 <h1 className="mb-2 mt-3 pl-3">Product</h1>
                 <header className="container mb-0 position-sticky bg-white p-3">
                     <ul className="row m-0 px-auto">
@@ -146,8 +147,8 @@ const Products: React.FC = () => {
                         }
                     </table>
                 </div>
-            </div>
-        </div>
+            </Col>
+        </Container>
     );
 }
 

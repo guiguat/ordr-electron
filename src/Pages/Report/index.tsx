@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import NavBar from '../../Components/NavBar';
 import { FiFilePlus, FiRefreshCcw } from 'react-icons/fi';
 import { useApi } from '../../Contexts/Api';
+import Container from '../../Components/Container';
+import Col from '../../Components/Col';
 
 import './Report.scss';
 
@@ -43,11 +45,11 @@ const Report: React.FC = () => {
     }
 
     return (  
-        <div className="row m-0 p-0 d-flex h-100 w-100">
-            <div className="col col-md-2 h-100 p-0">
+        <Container>
+            <Col type="nav">
                 <NavBar primary="report"/>
-            </div>
-            <div className="col col-md-10  h-100">
+            </Col>
+            <Col>
                 <h1 className="mb-1 mt-3 pl-3">Report</h1>
                 <header className="container mb-0 position-sticky bg-white p-3">
                     <ul className="row m-0 px-auto">
@@ -103,8 +105,8 @@ const Report: React.FC = () => {
                         }
                     </table>
                 </div>
-            </div>
-        </div>
+            </Col>
+        </Container>
     );
 }
 

@@ -1,10 +1,13 @@
 import React, {  useState, FormEvent } from 'react';
 import NavBar from '../../Components/NavBar';
-import { useAuth } from '../../Contexts/Auth';
+import { FiEdit, FiUserPlus, FiUserX } from 'react-icons/fi';
+import Container from '../../Components/Container';
+import Col from '../../Components/Col';
 
 import './Users.scss';
+import { useAuth } from '../../Contexts/Auth';
 import { useForms } from '../../Contexts/Forms';
-import { FiEdit, FiUserPlus, FiUserX } from 'react-icons/fi';
+
 
 const Users: React.FC = () => {
 const {currentUser, SignUp, DeleteUser, UpdateUser} = useAuth();
@@ -155,11 +158,11 @@ if(btnClicked==="man_user") return (
 )
 
 return (
-    <div className="row m-0 p-0 d-flex h-100 w-100">
-        <div className="col col-md-2 h-100 p-0">
+    <Container>
+        <Col type="nav">
             <NavBar primary="user"/>
-        </div>
-        <div className="col col-md-10  h-100">
+        </Col>
+        <Col>
             <div className="container-fluid ">
                 <h1 className="mt-3">Users</h1>
                 <div className="container bg-light rounded-lg p-5 mt-5">
@@ -176,8 +179,8 @@ return (
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
+        </Col>
+    </Container>
 );
 }
 
