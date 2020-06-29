@@ -9,6 +9,7 @@ import { useApi } from '../../Contexts/Api';
 import Stock from './Stock';
 import Container from '../../Components/Container';
 import Col from '../../Components/Col';
+
 interface IProductsData{
     id: number,
     name: string,
@@ -23,20 +24,30 @@ const Products: React.FC = () => {
     const [tableData, setTableData] = useState<Array<IProductsData>>([]);
 
     useEffect(()=>{
+        async function getProducts(){
+            try {
+                const response = await Api.get("/product")
+                setTableData(response.data);
+            } catch (error) {
+                alert("An error occurred when trying to reach the server:\n"+error);
+            }
+        }
         if(btnClicked === "")getProducts();
-    });
+    },[btnClicked, Api]);
 
     if(btnClicked === "create_products") return <CreateUpdate type="create"/>
     if(btnClicked === "update_products") return <CreateUpdate type="update"/>
     if(btnClicked === "stock_products") return <Stock/>
 
     async function getProducts(){
+
         try {
-            const response = await Api.get("/product");
+            const response = await Api.get("/product")
             setTableData(response.data);
         } catch (error) {
             alert("An error occurred when trying to reach the server:\n"+error);
         }
+
     }
     
     async function delProduct(){

@@ -22,8 +22,16 @@ const Report: React.FC = () => {
     const [reportData, setReportData] = useState<Array<IReportData>>([]);
 
     useEffect(() => {
+        async function getReports(){
+            try {
+                const response = await Api.get('/report');
+                setReportData(response.data);
+            } catch (error) {
+                alert("An error occurred when trying to reach the server:\n"+error)
+            }
+        }
         getReports();
-    })
+    },[Api])
 
     async function getReports(){
         try {
