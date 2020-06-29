@@ -2,14 +2,15 @@ import React from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { useAuth } from '../Contexts/Auth';
 
+import "../custom.scss";
+
 import Login from '../Pages/Login';
 import PrivateRoute from './PrivateRoute';
 import Home from '../Pages/Home';
 import User from '../Pages/User';
 import Product from '../Pages/Product';
 import Report from '../Pages/Report';
-
-import "../custom.scss";
+import Costumer from '../Pages/Costumer';
 
 const Routes: React.FC = () =>{
     const { currentUser } = useAuth();
@@ -44,6 +45,13 @@ const Routes: React.FC = () =>{
                  path="/report"
                  redirectPath="/login"
                  component={Report}
+                />
+
+                <PrivateRoute
+                 isAuth={!!currentUser}
+                 path="/costumer"
+                 redirectPath="/login"
+                 component={Costumer}
                 />
 
                 <Route path="/login" component={Login}/>
