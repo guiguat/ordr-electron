@@ -59,7 +59,7 @@ const CreateUpdate: React.FC<ICreateUpdateProps> = (props) => {
                     props.type==="create"?(<></>):(
                         <div className="form-group">
                             <label htmlFor="id">Id *</label>
-                            <input type="number" required defaultValue={Id}
+                            <input type="number" required value={Id}
                             onChange={event=>setId(event.target.value)}
                             className="form-control" id="id"
                             />
