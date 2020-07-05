@@ -3,11 +3,8 @@ import NavBar from '../../Components/NavBar';
 import { FiEdit, FiUserPlus, FiUserX } from 'react-icons/fi';
 import Container from '../../Components/Container';
 import Col from '../../Components/Col';
-
 import './Users.scss';
 import { useAuth } from '../../Contexts/Auth';
-import { useForms } from '../../Contexts/Forms';
-
 
 const Users: React.FC = () => {
 const {currentUser, SignUp, DeleteUser, UpdateUser} = useAuth();
