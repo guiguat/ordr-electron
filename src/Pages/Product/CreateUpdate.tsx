@@ -4,22 +4,20 @@ import { useForms, IProductsData } from '../../Contexts/Forms';
 import './Products.scss';
 import { FiFilePlus, FiEdit } from 'react-icons/fi';
 import { useApi } from '../../Contexts/Api';
-
 interface ICreateUpdateProps{
     type:string
 }
 
-const Create: React.FC<ICreateUpdateProps> = (props) => {
+const CreateUpdate: React.FC<ICreateUpdateProps> = (props) => {
 
-    const { setBtnClicked, prodSelected, setProdSelected } = useForms();
+    const { prodSelected, setProdSelected } = useForms();
     const {Api} = useApi();
-
-    const [id, setId] = useState(prodSelected.id && props.type!=="create"?prodSelected.id.toString():"");
-    const [Name, setName] = useState(prodSelected.name && props.type!=="create"?prodSelected.name:"");
-    const [Price, setPrice] = useState(prodSelected.price && props.type!=="create"?prodSelected.price.toString():"0.00");
-    const [Stock, setStock] = useState(prodSelected.stock && props.type!=="create"?prodSelected.stock.toString():"0");
-    const [Dish, setDish] = useState(prodSelected.type && props.type!=="create"?prodSelected.type:"");
-
+    const [Id, setId] = useState(prodSelected.id? prodSelected.id.toString() : "0");
+    const [Stock, setStock] = useState(prodSelected.stock?prodSelected.stock.toString() : "0");
+    const [Name, setName] = useState(prodSelected.name?prodSelected.name:"");
+    const [Price, setPrice] = useState(prodSelected.price?prodSelected.price.toString():"0.00");
+    const [Dish, setDish] = useState(prodSelected.type?prodSelected.type:"");
+    
     async function handleSubmit(event:any){
         event.preventDefault();
         const data = {
@@ -29,7 +27,7 @@ const Create: React.FC<ICreateUpdateProps> = (props) => {
             type:Dish==="on"?"dish":""
         }
         const dataPut = {
-            id,
+            id:Id,
             ...data
         }
         try{
@@ -37,40 +35,31 @@ const Create: React.FC<ICreateUpdateProps> = (props) => {
                 await Api.post("/product", data)
                 :await Api.put("/product", dataPut);
             alert(res.data.message);
-            setName("");
-            setPrice("");
-            setStock("");
-            setDish("");
-            setBtnClicked("");
-            setProdSelected({} as IProductsData);
+            clear()
         }
         catch(error){
             alert("An error occurred when trying to reach the server: \n"+ error);
         }
     }
 
+    function clear(){
+        setId("0")
+        setName("");
+        setPrice("0.00");
+        setStock("0");
+        setDish("");
+        setProdSelected({} as IProductsData);
+    }
+
     return (
-        <div className="container-fluid mx-auto position-absolute p-0 h-100 onTop">
-            <form onSubmit={handleSubmit} className="container bg-light p-4 rounded-lg mt-5">
-                <div className="row">
-                    <div className="col col-md-6">
-                    <h2 className="text-dark font-weight-bold mb-3">
-                        {
-                            props.type==="create"?"Create Product":"Update Product"
-                        }
-                    </h2>
-                    </div>
-                    <div className="col col-md-6">
-                    <button type="button" onClick={()=>{setBtnClicked("")}} className="close mb-4" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                </div>
+
+        <form onSubmit={handleSubmit} className="container px-4 rounded-lg">
+            <div className="modal-body">
                 {
                     props.type==="create"?(<></>):(
                         <div className="form-group">
                             <label htmlFor="id">Id *</label>
-                            <input type="number" required value={id}
+                            <input type="number" required defaultValue={Id}
                             onChange={event=>setId(event.target.value)}
                             className="form-control" id="id"
                             />
@@ -102,29 +91,29 @@ const Create: React.FC<ICreateUpdateProps> = (props) => {
                 <div className="form-group mb-3">
                     <label className="mr-2" htmlFor="typeCheck">Is a dish: </label>
                     <input type="checkbox" onChange={event => setDish(Dish==="on"?"":event.target.value)}
-                     id="typeCheck" aria-label="Checkbox if a dish or not"/>
+                    id="typeCheck" aria-label="Checkbox if a dish or not"/>
                 </div>
+            </div>
+            <div className="modal-footer">
+                <button type="submit" className="btn btn-primary">
+                    {
+                        props.type === "create"? (
+                            <>
+                                <FiFilePlus size={18}  className="mr-2 mb-1"/>
+                                Create
+                            </>
+                        ):(
+                            <>
+                                <FiEdit size={18}  className="mr-2 mb-1"/>
+                                Update
+                            </>
+                        )
+                    }
+                </button>
+            </div>
+        </form>
 
-                <div className="input-group">
-                    <button type="submit" className="btn btn-primary">
-                        {
-                            props.type === "create"? (
-                                <>
-                                    <FiFilePlus size={18}  className="mr-2 mb-1"/>
-                                    Create
-                                </>
-                            ):(
-                                <>
-                                    <FiEdit size={18}  className="mr-2 mb-1"/>
-                                    Update
-                                </>
-                            )
-                        }
-                    </button>
-                </div>
-            </form>
-        </div>
     );
 }
 
-export default Create;
+export default CreateUpdate;

@@ -10,7 +10,7 @@ import { useApi } from '../../Contexts/Api';
 
 const Stock: React.FC = () => {
 
-    const { setBtnClicked, prodSelected, setProdSelected } = useForms();
+    const {prodSelected, setProdSelected } = useForms();
     const {Api} = useApi();
 
     const [id, setId] = useState(prodSelected.id? prodSelected.id.toString() : "0");
@@ -27,7 +27,6 @@ const Stock: React.FC = () => {
     }
 
     function clear(){
-        setBtnClicked(""); 
         setId("0");
         setStock("0");
         setProdSelected({} as IProductsData);
@@ -35,18 +34,8 @@ const Stock: React.FC = () => {
 
     return (
     
-        <div className="container-fluid mx-auto position-absolute p-0 h-100 onTop">
-            <form onSubmit={handleSubmit} className="container bg-light p-4 rounded-lg mt-5">
-                <div className="row">
-                    <div className="col col-md-6">
-                        <h2 className="text-dark font-weight-bold mb-3">Stock Product</h2>
-                    </div>
-                    <div className="col col-md-6">
-                        <button type="button" onClick={clear} className="close mb-4" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
+        <form onSubmit={handleSubmit} className="container px-4 rounded-lg">
+            <div className="modal-body">
                 <div className="form-group">
                     <label htmlFor="id">Id *</label>
                     <input type="number" required value={id}
@@ -61,13 +50,14 @@ const Stock: React.FC = () => {
                     className="form-control" id="Stock"
                     />
                 </div>
+            </div>
+            <div className="modal-footer">
                 <button type="submit" className="btn btn-info">
                     <FiShoppingBag size={18}  className="mr-2 mb-1"/>
                     Stock
                 </button>
-            </form>
-        </div>
-    
+            </div>
+        </form>
     );
 }
 
