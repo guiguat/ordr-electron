@@ -1,10 +1,8 @@
 import React, {useState, useContext} from 'react';
 
 interface IFormsContext {
-    btnClicked: string;
-    setBtnClicked(btnType:string):void;
     prodSelected:IProductsData;
-    setProdSelected(product:IProductsData):void
+    setProdSelected(product:IProductsData):void;
 }
 
 export interface IProductsData{
@@ -19,11 +17,13 @@ export const FormsContext = React.createContext<IFormsContext>({} as IFormsConte
 
 export const FormsProvider: React.FC = ({ children }) => {
 
-    const [btnClicked, setBtnClicked] = useState("");
     const [prodSelected, setProdSelected] = useState({} as IProductsData);
 
     return (
-        <FormsContext.Provider value={ { btnClicked, setBtnClicked, prodSelected, setProdSelected } }>
+        <FormsContext.Provider value={ { 
+                prodSelected,
+                setProdSelected,
+            } }>
             {children}
         </FormsContext.Provider>
     );
