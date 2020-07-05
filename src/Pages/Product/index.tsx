@@ -19,7 +19,7 @@ interface IProductsData{
 }
 
 const Products: React.FC = () => {
-    const { btnClicked, setBtnClicked, setProdSelected, prodSelected } = useForms();
+    const { setProdSelected, prodSelected } = useForms();
     const {Api} = useApi();
     const [tableData, setTableData] = useState<Array<IProductsData>>([]);
 
@@ -32,12 +32,8 @@ const Products: React.FC = () => {
                 alert("An error occurred when trying to reach the server:\n"+error);
             }
         }
-        if(btnClicked === "")getProducts();
-    },[btnClicked, Api]);
-
-    if(btnClicked === "create_products") return <CreateUpdate type="create"/>
-    if(btnClicked === "update_products") return <CreateUpdate type="update"/>
-    if(btnClicked === "stock_products") return <Stock/>
+        getProducts();
+    },[Api]);
 
     async function getProducts(){
 
@@ -73,6 +69,49 @@ const Products: React.FC = () => {
                 <NavBar primary="product"/>
             </Col>
             <Col>
+                {/* modals */}
+                <div className="modal fade" id="createModal" tabIndex={-1} role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="createModalLabel">Create Product</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <CreateUpdate type="create"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="modal fade" id="updateModal" tabIndex={-1} role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="updateModalLabel">Update Product</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <CreateUpdate type="update"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="modal fade" id="stockModal" tabIndex={-1} role="dialog" aria-labelledby="stockModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="stockModalLabel">Stock Product</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <Stock/>
+                        </div>
+                    </div>
+                </div>
+
                 <h1 className="mb-2">Product</h1>
                 <header className="container mb-0 position-sticky bg-white py-3">
                     <ul className="row m-0 px-auto">
@@ -87,7 +126,7 @@ const Products: React.FC = () => {
                         <li className="col col-md-2">
                             <button 
                                 className="btn bg-light shadow-sm text-success"
-                                onClick={()=> setBtnClicked("create_products")}
+                                data-toggle="modal" data-target="#createModal"
                             >
                                 <FiPlus size={18} className="mb-1 mr-2"/>
                                 Create
@@ -96,7 +135,7 @@ const Products: React.FC = () => {
                         <li className="col col-md-2">
                             <button
                             className="btn bg-light shadow-sm text-warning"
-                            onClick={()=> setBtnClicked("update_products")}
+                            data-toggle="modal" data-target="#updateModal"
                             >
                                 <FiEdit size={18} className="mb-1 mr-2"/>
                                 Update
@@ -114,7 +153,7 @@ const Products: React.FC = () => {
                         <li className="col col-md-2">
                             <button
                             className="btn bg-light shadow-sm text-info"
-                            onClick={()=> setBtnClicked("stock_products")}
+                            data-toggle="modal" data-target="#stockModal"
                             >
                                 <FiShoppingBag size={18} className="mb-1 mr-2"/>
                                 Stock
