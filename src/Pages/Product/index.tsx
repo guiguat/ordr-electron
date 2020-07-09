@@ -107,7 +107,7 @@ const Products: React.FC = () => {
                         </li> */}
                         <li className="col col-md-2">
                             <button 
-                                className="btn bg-light shadow-sm text-success"
+                                className="btn shadow-sm btn-success"
                                 data-toggle="modal" data-target="#createModal"
                             >
                                 <FiPlus size={18} className="mb-1 mr-2"/>
@@ -116,7 +116,7 @@ const Products: React.FC = () => {
                         </li>
                         <li className="col col-md-2">
                             <button
-                            className="btn bg-light shadow-sm text-warning"
+                            className="btn shadow-sm btn-warning"
                             data-toggle="modal" data-target="#updateModal"
                             >
                                 <FiEdit size={18} className="mb-1 mr-2"/>
@@ -125,7 +125,7 @@ const Products: React.FC = () => {
                         </li>
                         <li className="col col-md-2">
                             <button
-                            className="btn bg-light shadow-sm text-danger"
+                            className="btn shadow-sm btn-danger"
                             onClick={delProduct}
                             >
                                 <FiTrash2 size={18} className="mb-1 mr-2"/>
@@ -134,7 +134,7 @@ const Products: React.FC = () => {
                         </li>
                         <li className="col col-md-2">
                             <button
-                            className="btn bg-light shadow-sm text-info"
+                            className="btn shadow-sm btn-info"
                             data-toggle="modal" data-target="#stockModal"
                             >
                                 <FiShoppingBag size={18} className="mb-1 mr-2"/>

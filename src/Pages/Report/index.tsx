@@ -40,15 +40,15 @@ const Report: React.FC = () => {
             </Col>
             <Col>
                 <h1 className="mb-1">Report</h1>
-                <header className="container mb-0 position-sticky bg-white py-3">
-                    <button 
-                        className="btn bg-light shadow-sm text-success"
-                        onClick={openReport}
-                    >
-                        <FiFilePlus size={18} className="mb-1 mr-2"/>
-                        Open new
-                    </button>
-                </header>
+
+                <button 
+                    className="btn shadow-sm btn-success my-3"
+                    onClick={openReport}
+                >
+                    <FiFilePlus size={18} className="mb-1 mr-2"/>
+                    Open new
+                </button>
+
                 <table className="table">
                     <caption>List of reports</caption>
                     <thead className="thead-dark">
