@@ -23,7 +23,7 @@ const CostumerOrders: React.FC<ICostumerOrdersProps> = ({costumer_id}) => {
             <caption>List of orders</caption>
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
+                    <th scope="col">Product</th>
                     <th scope="col">Price</th>
                 </tr>
             </thead>
