@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 import './Products.scss';
 import NavBar from '../../Components/NavBar';
-import {FiPlus, FiEdit, FiTrash2, FiShoppingBag, FiRefreshCcw} from 'react-icons/fi';
+import { FiPlus, FiEdit, FiTrash2, FiShoppingBag } from 'react-icons/fi';
 import CreateUpdate from './CreateUpdate';
 import { useForms } from '../../Contexts/Forms';
 import { useApi } from '../../Contexts/Api';
@@ -20,32 +20,14 @@ interface IProductsData{
 
 const Products: React.FC = () => {
     const { setProdSelected, prodSelected } = useForms();
-    const {Api} = useApi();
-    const [tableData, setTableData] = useState<Array<IProductsData>>([]);
+    const {Api, useAxios} = useApi();
 
-    useEffect(()=>{
-        async function getProducts(){
-            try {
-                const response = await Api.get("/product")
-                setTableData(response.data);
-            } catch (error) {
-                alert("An error occurred when trying to reach the server:\n"+error);
-            }
-        }
-        getProducts();
-    },[Api]);
+    const { data, error } = useAxios<IProductsData[]>("/product")
 
-    async function getProducts(){
+    if (error) alert("An error occurred when trying to reach the server:\n"+error);
 
-        try {
-            const response = await Api.get("/product")
-            setTableData(response.data);
-        } catch (error) {
-            alert("An error occurred when trying to reach the server:\n"+error);
-        }
+    if(!data) return <p>Loading...</p>
 
-    }
-    
     async function delProduct(){
         const answer = window.confirm("Do you really want to delete "+prodSelected.name+" from the database?")
         if(answer){
@@ -57,8 +39,8 @@ const Products: React.FC = () => {
                 }
                 else throw new Error("Please select a product from the table below");
                 
-            } catch (error) {
-                alert("An error occurred when trying to reach the server:\n"+error)
+            } catch (e) {
+                alert("An error occurred when trying to reach the server:\n"+e)
             }
         }
     }
@@ -115,14 +97,14 @@ const Products: React.FC = () => {
                 <h1 className="mb-2">Product</h1>
                 <header className="container mb-0 position-sticky bg-white py-3">
                     <ul className="row m-0 px-auto">
-                        <li className="col col-md-1">
+                        {/* <li className="col col-md-1">
                             <button 
                                 className="btn bg-light shadow-sm text-success"
                                 onClick={getProducts}
                             >
                                 <FiRefreshCcw size={18}/>
                             </button>
-                        </li>
+                        </li> */}
                         <li className="col col-md-2">
                             <button 
                                 className="btn bg-light shadow-sm text-success"
@@ -173,26 +155,26 @@ const Products: React.FC = () => {
                         </tr>
                     </thead>
                     {
-                        tableData?(
-                            <tbody>
-                                {
-                                    tableData.map(
-                                        (product:IProductsData)=>(
-                                            <tr className={`${prodSelected.id === product.id? "bg-secondary text-white" :""}`}
-                                            onClick={()=>setProdSelected(product)}
-                                            key={product.id}
-                                            >
-                                                <th scope="row">{product.id}</th>
-                                                <td colSpan={2}>{product.name}</td>
-                                                <td colSpan={product.type===""?1:2}>{product.price}</td>
-                                                <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
-                                                <td>{product.type===""?"":product.type.toUpperCase()}</td>
-                                            </tr>
-                                        )
+
+                        <tbody>
+                            {
+                                data?.map(
+                                    (product:IProductsData)=>(
+                                        <tr className={`${prodSelected.id === product.id? "bg-secondary text-white" :""}`}
+                                        onClick={()=>setProdSelected(product)}
+                                        key={product.id}
+                                        >
+                                            <th scope="row">{product.id}</th>
+                                            <td colSpan={2}>{product.name}</td>
+                                            <td colSpan={product.type===""?1:2}>{product.price}</td>
+                                            <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
+                                            <td>{product.type===""?"":product.type.toUpperCase()}</td>
+                                        </tr>
                                     )
-                                }
-                            </tbody>
-                        ):(<></>)
+                                )
+                            }
+                        </tbody>
+
                     }
                 </table>
             </Col>
