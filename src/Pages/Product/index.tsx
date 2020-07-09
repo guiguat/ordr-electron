@@ -154,28 +154,24 @@ const Products: React.FC = () => {
                             <th scope="col">Type</th>
                         </tr>
                     </thead>
-                    {
-
-                        <tbody>
-                            {
-                                data?.map(
-                                    (product:IProductsData)=>(
-                                        <tr className={`${prodSelected.id === product.id? "bg-secondary text-white" :""}`}
-                                        onClick={()=>setProdSelected(product)}
-                                        key={product.id}
-                                        >
-                                            <th scope="row">{product.id}</th>
-                                            <td colSpan={2}>{product.name}</td>
-                                            <td colSpan={product.type===""?1:2}>{product.price}</td>
-                                            <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
-                                            <td>{product.type===""?"":product.type.toUpperCase()}</td>
-                                        </tr>
-                                    )
+                    <tbody className="table-products">
+                        {
+                            data?.map(
+                                (product:IProductsData)=>(
+                                    <tr className={`${prodSelected.id === product.id? "bg-secondary text-white" :""}`}
+                                    onClick={()=>setProdSelected(product)}
+                                    key={product.id}
+                                    >
+                                        <th scope="row">{product.id}</th>
+                                        <td colSpan={2}>{product.name}</td>
+                                        <td colSpan={product.type===""?1:2}>{product.price}</td>
+                                        <td className={`${product.type===""?"":"d-none"}`}>{product.stock}</td>
+                                        <td>{product.type===""?"":product.type.toUpperCase()}</td>
+                                    </tr>
                                 )
-                            }
-                        </tbody>
-
-                    }
+                            )
+                        }
+                    </tbody>
                 </table>
             </Col>
         </Container>
