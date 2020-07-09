@@ -95,7 +95,7 @@ const CreateUpdate: React.FC<ICreateUpdateProps> = (props) => {
                 </div>
             </div>
             <div className="modal-footer">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className={`btn ${props.type === 'create'? 'btn-primary':'btn-warning'}`}>
                     {
                         props.type === "create"? (
                             <>
