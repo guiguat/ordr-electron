@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Container from '../../Components/Container';
 import Col from '../../Components/Col';
 import NavBar from '../../Components/NavBar';
 import { useApi } from '../../Contexts/Api';
 import {FiUserPlus, FiTrash2} from 'react-icons/fi'
 import CostumerOrders from './CostumerOrders';
-import "./Costumer.scss";
 interface ICostumer{
     id:number,
     name:string,
@@ -14,31 +13,14 @@ interface ICostumer{
 
 const Costumer: React.FC = () => {
     
-    const {Api} = useApi();
+    const {Api, useAxios} = useApi();
     const [name, setName] = useState("");
     const [document, setDocument] = useState("");
-    const [costumers, setCostumers] = useState<Array<ICostumer>>([]);
 
-    useEffect(() => {
-        async function getCostumers(){
-            try {
-                const response = await Api.get("/costumer");
-                setCostumers(response.data);
-            } catch (error) {
-                alert("An error occurred when trying to reach the server:\n"+error);
-            }
-        }
-        getCostumers();
-    }, [Api])
+    const {data, error} = useAxios<ICostumer[]>("/costumer");
 
-    async function getCostumers(){
-        try {
-            const response = await Api.get("/costumer");
-            setCostumers(response.data);
-        } catch (error) {
-            alert("An error occurred when trying to reach the server:\n"+error);
-        }
-    }
+    if(error) alert("An error occurred when trying to reach the server:\n"+error)
+    if(!data) return <p>Loading...</p>
 
     async function createNewCostumer(event:any){
         event.preventDefault();
@@ -51,9 +33,8 @@ const Costumer: React.FC = () => {
             alert(response.data.message);
             setName("");
             setDocument("");
-            getCostumers();
-        } catch (error) {
-            alert("An error occurred when trying to reach the server:\n"+error);
+        } catch (e) {
+            alert("An error occurred when trying to reach the server:\n"+e);
         }
     }
 
@@ -61,9 +42,8 @@ const Costumer: React.FC = () => {
         try {
             const response = await Api.delete(`/costumer?id=${id}`);
             alert(response.data.message);
-            getCostumers();
-        } catch (error) {
-            alert("An error occurred when trying to reach the server:\n"+error);
+        } catch (e) {
+            alert("An error occurred when trying to reach the server:\n"+e);
         }
     }
 
@@ -115,8 +95,7 @@ const Costumer: React.FC = () => {
                 </div>
                 <div className="container-fluid mt-3 p-0" id="costumers">
                     {
-                        costumers?
-                        costumers.map(costumer => {
+                        data?.map(costumer => {
                             return (
                                 <div key={costumer.id} className="container-fluid mx-auto mb-4 bg-light rounded-lg p-4">
                                     <div className="row">
@@ -133,7 +112,7 @@ const Costumer: React.FC = () => {
                                     <CostumerOrders costumer_id={costumer.id}/>
                                 </div>
                             )
-                        }):<></>
+                        })
                     }
                 </div>
             </Col>

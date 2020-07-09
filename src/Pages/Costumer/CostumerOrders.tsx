@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useApi } from '../../Contexts/Api';
 
 interface ICostumerOrdersProps{
@@ -11,19 +11,12 @@ interface IProduct{
 }
 
 const CostumerOrders: React.FC<ICostumerOrdersProps> = ({costumer_id}) => {
-    const {Api} = useApi();
-    const [orders, setOrders] = useState<Array<IProduct>>([]);
-    useEffect(() => {
-        async function getOrders(){
-            try {
-                const response = await Api.get(`/account?costumer_id=${costumer_id}`);
-                setOrders(response.data);
-            } catch (error) {
-                console.log(error);  
-            }
-        }
-        getOrders();
-    }, [Api, costumer_id])
+    const { useAxios } = useApi();
+    const { data, error } = useAxios<IProduct[]>(`/account?costumer_id=${costumer_id}`)
+
+    if(error) console.log(error);
+    if (!data) return <p>Loading...</p>
+
     return (
     
         <table className="table">
@@ -34,22 +27,18 @@ const CostumerOrders: React.FC<ICostumerOrdersProps> = ({costumer_id}) => {
                     <th scope="col">Price</th>
                 </tr>
             </thead>
-            {
-                orders?(
-                    <tbody>
-                        {
-                            orders.map(
-                                (product:IProduct, index)=>(
-                                    <tr key={index}>
-                                        <th scope="row">{product.name}</th>
-                                        <td>{product.price}</td>
-                                    </tr>
-                                )
-                            )
-                        }
-                    </tbody>
-                ):(<></>)
-            }
+            <tbody>
+                {
+                    data?.map(
+                        (product:IProduct, index)=>(
+                            <tr key={index}>
+                                <th scope="row">{product.name}</th>
+                                <td>{product.price}</td>
+                            </tr>
+                        )
+                    )
+                }
+            </tbody>
         </table>
 
     );
