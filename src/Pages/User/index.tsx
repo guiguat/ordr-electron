@@ -1,70 +1,63 @@
 import React, {  useState, FormEvent } from 'react';
-import NavBar from '../../Components/NavBar';
 import { FiEdit, FiUserPlus, FiUserX } from 'react-icons/fi';
-import Container from '../../Components/Container';
-import Col from '../../Components/Col';
 import './Users.scss';
 import { useAuth } from '../../Contexts/Auth';
 
 const Users: React.FC = () => {
-const {currentUser, SignUp, DeleteUser, UpdateUser} = useAuth();
-const [name, setName] = useState("");
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [newName, setNewName] = useState("");
-const [newEmail, setNewEmail] = useState("");
-const [newPwd, setNewPwd] = useState("");
-const [formType, setFormType] = useState("");
+    const {currentUser, SignUp, DeleteUser, UpdateUser, LogOut} = useAuth();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [newName, setNewName] = useState("");
+    const [newEmail, setNewEmail] = useState("");
+    const [newPwd, setNewPwd] = useState("");
+    const [formType, setFormType] = useState("");
 
-function handleNewUser(event:FormEvent){
-    event.preventDefault();
-    const data = {
-    email,
-    password,
-    name
+    function handleNewUser(event:FormEvent){
+        event.preventDefault();
+        const data = {
+        email,
+        password,
+        name
+        }
+        SignUp(data);
+        clear();
     }
-    SignUp(data);
-    clear();
-}
 
-function handleDelete(){
-    DeleteUser(email, password);
-    clear();
-}
-
-function handleUpdate(){
-    const data={
-    email,
-    password,
-    newName: newName===""?null:newName,
-    newEmail: newEmail===""?null:newEmail,
-    newPassword: newPwd===""?null:newPwd
+    function handleDelete(){
+        DeleteUser(email, password);
+        clear();
     }
-    UpdateUser(data);
-    clear();
-}
 
-function handleManage(event:any){
-    event.preventDefault();
-    if(formType==="up") handleUpdate();
-    if(formType==="del") handleDelete();
-}
+    function handleUpdate(){
+        const data={
+        email,
+        password,
+        newName: newName===""?null:newName,
+        newEmail: newEmail===""?null:newEmail,
+        newPassword: newPwd===""?null:newPwd
+        }
+        UpdateUser(data);
+        clear();
+    }
 
-function clear(){
-    setEmail("");
-    setPassword("");
-    setNewName("");
-    setNewPwd("");
-    setNewEmail("");
-}
+    function handleManage(event:any){
+        event.preventDefault();
+        if(formType==="up") handleUpdate();
+        if(formType==="del") handleDelete();
+    }
 
-return (
-    <Container>
-        <Col type="nav">
-            <NavBar primary="user"/>
-        </Col>
-        <Col>
-                {/* modals */}
+    function clear(){
+        setEmail("");
+        setPassword("");
+        setNewName("");
+        setNewPwd("");
+        setNewEmail("");
+    }
+
+    return (
+        <>
+            {/* modals */}
             <div className="modal fade" id="newUserModal" tabIndex={-1} role="dialog" aria-labelledby="newUserModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
@@ -182,11 +175,13 @@ return (
                     <FiEdit className="mr-3"/>
                     Manage Users
                 </button>
+                <button className="btn btn-warning w-100 mt-3" onClick={()=>LogOut()}>
+                    <FiEdit className="mr-3"/>
+                    Logout
+                </button>
             </div>
-
-        </Col>
-    </Container>
-);
+        </>
+    );
 }
 
 export default Users;
