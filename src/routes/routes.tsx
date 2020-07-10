@@ -14,6 +14,7 @@ import Col from '../Components/Col';
 import Container from '../Components/Container';
 import NavBar from '../Components/NavBar';
 import Config from '../Pages/Config';
+import Sale from '../Pages/Sale';
 
 const Routes: React.FC = () =>{
     const { currentUser } = useAuth();
@@ -60,6 +61,13 @@ const Routes: React.FC = () =>{
                         path="/costumer"
                         redirectPath="/login"
                         component={Costumer}
+                        />
+                        
+                        <PrivateRoute
+                        isAuth={!!currentUser}
+                        path="/sale"
+                        redirectPath="/login"
+                        component={Sale}
                         />
 
                         <Route path="/login" component={Login}/>
