@@ -21,7 +21,7 @@ const Routes: React.FC = () =>{
     return ( 
         <Router>
             <Container>
-                <Col type="nav">
+                <Col type="nav" className={`${!!currentUser?'':'d-none'}`}>
                     <NavBar primary="report"/>
                 </Col>
                 <Col>
