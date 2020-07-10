@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './NavBar.scss';
-import { FiActivity, FiHome, FiSettings, FiShoppingBag, FiUsers } from 'react-icons/fi';
+import { FiActivity, FiDollarSign, FiHome, FiSettings, FiShoppingBag, FiUsers } from 'react-icons/fi';
 
 const NavBar: React.FC = () => {
 
@@ -28,6 +28,11 @@ const NavBar: React.FC = () => {
                 <li className="nav-item">
                     <a className="nav-link" href="#/costumer">
                         <FiUsers size={18} className="mr-2"/> Costumer
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="#/sale">
+                        <FiDollarSign size={18} className="mr-2"/> Sale
                     </a>
                 </li>
             </ul>
