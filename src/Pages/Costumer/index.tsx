@@ -94,7 +94,7 @@ const Costumer: React.FC = () => {
                                 <div className="row">
                                     <div className="col col-md-11">
                                         <h4 className="m-0">{costumer.name}</h4>
-                                        <span className="text-secondary">{costumer.document}</span>
+                                        <span className="text-secondary">Document ID: {costumer.document}</span>
                                     </div>
                                     <div className="col col-md-1">
                                         <button className="btn p-0" onClick={()=>deleteCostumer(costumer.id)}>
