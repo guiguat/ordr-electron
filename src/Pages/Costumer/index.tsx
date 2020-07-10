@@ -91,7 +91,7 @@ const Costumer: React.FC = () => {
                     data?.map(costumer => {
                         return (
                             <div key={costumer.id} className="container-fluid mx-auto mb-4 bg-light rounded-lg p-4">
-                                <div className="row">
+                                <div className="row mb-3">
                                     <div className="col col-md-11">
                                         <h4 className="m-0">{costumer.name}</h4>
                                         <span className="text-secondary">Document ID: {costumer.document}</span>
