@@ -7,13 +7,13 @@ import "../custom.scss";
 import Login from '../Pages/Login';
 import PrivateRoute from './PrivateRoute';
 import Home from '../Pages/Home';
-import User from '../Pages/User';
 import Product from '../Pages/Product';
 import Report from '../Pages/Report';
 import Costumer from '../Pages/Costumer';
 import Col from '../Components/Col';
 import Container from '../Components/Container';
 import NavBar from '../Components/NavBar';
+import Config from '../Pages/Config';
 
 const Routes: React.FC = () =>{
     const { currentUser } = useAuth();
@@ -22,7 +22,7 @@ const Routes: React.FC = () =>{
         <Router>
             <Container>
                 <Col type="nav" className={`${!!currentUser?'':'d-none'}`}>
-                    <NavBar primary="report"/>
+                    <NavBar/>
                 </Col>
                 <Col>
                     <Switch>
@@ -36,9 +36,9 @@ const Routes: React.FC = () =>{
 
                         <PrivateRoute
                         isAuth={!!currentUser}
-                        path="/user"
+                        path="/config"
                         redirectPath="/login"
-                        component={User}
+                        component={Config}
                         />
                         
                         <PrivateRoute
