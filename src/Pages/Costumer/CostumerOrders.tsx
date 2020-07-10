@@ -20,6 +20,9 @@ const CostumerOrders: React.FC<ICostumerOrdersProps> = ({costumer_id}) => {
 
     if(data.length === 0) return <p className="text-grey-800 mt-3 font-weight-bold ">No orders for now!</p>
 
+    let total = 0.00;
+    data.forEach((product:IProduct) => total += product.price)
+    
     async function handleFinishPurchase(){
         try{
             const res = await Api.delete(`/account?costumer_id=${costumer_id}`)
@@ -54,8 +57,10 @@ const CostumerOrders: React.FC<ICostumerOrdersProps> = ({costumer_id}) => {
                     }
                 </tbody>
             </table>
+            <span className="font-weight-bold text-grey-800">TOTAL: R${total.toFixed(2)}</span>
+            <br/><br/>
             <button className="btn btn-dark" onClick={handleFinishPurchase}>
-                <FiInbox size={18} className="mr-2"/> Finish purchase
+                <FiInbox size={18} className="mr-2"/> Finish sale
             </button>
         </div>
     );
