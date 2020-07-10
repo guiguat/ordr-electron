@@ -163,23 +163,25 @@ const Users: React.FC = () => {
             </div>
             {/* end modals */}
 
-            <h1>Users</h1>
+            <h3>Users</h3>
             <div className="container bg-light rounded-lg p-5 mt-3">
-                <h2 className="text-dark font-weight-bold mb-3">Current User</h2>
-                <h3 className="text-dark">Name: {currentUser?.displayName}</h3>
-                <h3 className="text-dark">Email: {currentUser?.email}</h3>
-                <button className="btn btn-primary w-100 mt-5" data-toggle="modal" data-target="#newUserModal">
-                    <FiUserPlus className="mr-3" />
-                    Register New
-                </button>
-                <button className="btn btn-warning w-100 mt-3" data-toggle="modal" data-target="#manageModal">
-                    <FiEdit className="mr-3"/>
-                    Manage Users
-                </button>
-                <button className="btn btn-danger w-100 mt-3" onClick={()=>LogOut()}>
-                    <FiLogOut className="mr-3"/>
-                    Logout
-                </button>
+                <h3  className="text-dark font-weight-bold mb-3">Current User</h3>
+                <h4 className="text-dark">Name: {currentUser?.displayName}</h4>
+                <h4 className="text-dark">Email: {currentUser?.email}</h4>
+                <div className="row">
+                    <button className="btn btn-primary w-100 col mt-4 mx-3" data-toggle="modal" data-target="#newUserModal">
+                        <FiUserPlus className="mr-3" />
+                        Register New
+                    </button>
+                    <button className="btn btn-warning w-100 col mt-4 mx-3" data-toggle="modal" data-target="#manageModal">
+                        <FiEdit className="mr-3"/>
+                        Manage Users
+                    </button>
+                    <button className="btn btn-danger w-100 col mt-4 mx-3" onClick={()=>LogOut()}>
+                        <FiLogOut className="mr-3"/>
+                        Logout
+                    </button>
+                </div>
             </div>
         </>
     );
