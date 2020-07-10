@@ -89,14 +89,6 @@ const Products: React.FC = () => {
             <h1 className="mb-2">Product</h1>
             <header className="container mb-0 position-sticky bg-white py-3">
                 <ul className="row m-0 px-auto">
-                    {/* <li className="col col-md-1">
-                        <button 
-                            className="btn bg-light shadow-sm text-success"
-                            onClick={getProducts}
-                        >
-                            <FiRefreshCcw size={18}/>
-                        </button>
-                    </li> */}
                     <li className="col col-md-2">
                         <button 
                             className="btn shadow-sm btn-success"
