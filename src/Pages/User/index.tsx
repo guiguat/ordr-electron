@@ -1,5 +1,5 @@
 import React, {  useState, FormEvent } from 'react';
-import { FiEdit, FiUserPlus, FiUserX } from 'react-icons/fi';
+import { FiEdit, FiLogOut, FiUserPlus, FiUserX } from 'react-icons/fi';
 import './Users.scss';
 import { useAuth } from '../../Contexts/Auth';
 
@@ -161,9 +161,10 @@ const Users: React.FC = () => {
                     </div>
                 </div>
             </div>
+            {/* end modals */}
 
             <h1>Users</h1>
-            <div className="container bg-light rounded-lg p-5 mt-5">
+            <div className="container bg-light rounded-lg p-5 mt-3">
                 <h2 className="text-dark font-weight-bold mb-3">Current User</h2>
                 <h3 className="text-dark">Name: {currentUser?.displayName}</h3>
                 <h3 className="text-dark">Email: {currentUser?.email}</h3>
@@ -175,8 +176,8 @@ const Users: React.FC = () => {
                     <FiEdit className="mr-3"/>
                     Manage Users
                 </button>
-                <button className="btn btn-warning w-100 mt-3" onClick={()=>LogOut()}>
-                    <FiEdit className="mr-3"/>
+                <button className="btn btn-danger w-100 mt-3" onClick={()=>LogOut()}>
+                    <FiLogOut className="mr-3"/>
                     Logout
                 </button>
             </div>
