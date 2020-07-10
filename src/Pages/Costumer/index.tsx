@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApi } from '../../Contexts/Api';
-import {FiUserPlus, FiTrash2} from 'react-icons/fi'
+import {FiUserPlus, FiTrash2, FiEdit} from 'react-icons/fi'
 import CostumerOrders from './CostumerOrders';
 interface ICostumer{
     id:number,
@@ -13,6 +13,7 @@ const Costumer: React.FC = () => {
     const {Api, useAxios} = useApi();
     const [name, setName] = useState("");
     const [document, setDocument] = useState("");
+    const [costumerId, setCostumerId] = useState(0);
 
     const {data, error} = useAxios<ICostumer[]>("/costumer");
 
@@ -30,6 +31,24 @@ const Costumer: React.FC = () => {
             alert(response.data.message);
             setName("");
             setDocument("");
+        } catch (e) {
+            alert("An error occurred when trying to reach the server:\n"+e);
+        }
+    }
+
+    async function updateCostumer(event:any){
+        event.preventDefault();
+        try {
+            const data = {
+                id:costumerId,
+                name,
+                document
+            }
+            const response = await Api.put("/costumer", data);
+            alert(response.data.message);
+            setName("");
+            setDocument("");
+            setCostumerId(0);
         } catch (e) {
             alert("An error occurred when trying to reach the server:\n"+e);
         }
@@ -86,6 +105,43 @@ const Costumer: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="modal fade" id="editCostumerModal" tabIndex={-1} role="dialog" aria-labelledby="editCostumerModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="editCostumerModalLabel">Update info</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form onSubmit={updateCostumer}>
+                            <div className="modal-body">
+                                <div className="form-group">
+                                    <label htmlFor="name">Name *</label>
+                                    <input type="text" required value={name}
+                                    onChange={e => setName(e.target.value)}
+                                    className="form-control form-control-sm" id="name"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="document">Document *</label>
+                                    <input type="text" required value={document}
+                                    onChange={e => setDocument(e.target.value)}
+                                    className="form-control form-control-sm" id="document"
+                                    />
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button className="btn btn-warning w-100" type="submit">
+                                    <FiEdit className="mb-1 mr-2"/> Update
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <div className="container-fluid mt-3 p-0" id="costumers">
                 {
                     data?.map(costumer => {
@@ -97,9 +153,17 @@ const Costumer: React.FC = () => {
                                         <span className="text-secondary">Document ID: {costumer.document}</span>
                                     </div>
                                     <div className="col col-md-1">
-                                        <button className="btn p-0" onClick={()=>deleteCostumer(costumer.id)}>
-                                            <FiTrash2 color="#d73a49" size={24}/>
-                                        </button>
+                                        <div className="row p-0">
+                                            <button className="btn p-0 mr-1"
+                                             data-toggle="modal" data-target="#editCostumerModal"
+                                             onClick={e => setCostumerId(costumer.id)}
+                                             >
+                                                <FiEdit className="text-warning" size={24}/>
+                                            </button>
+                                            <button className="btn p-0" onClick={()=>deleteCostumer(costumer.id)}>
+                                                <FiTrash2 className="text-danger" size={24}/>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <CostumerOrders costumer_id={costumer.id}/>
