@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiInbox } from 'react-icons/fi';
+import Loading from '../../Components/Loading';
 import { useApi } from '../../Contexts/Api';
 
 interface ICostumerOrdersProps{
@@ -16,9 +17,9 @@ const CostumerOrders: React.FC<ICostumerOrdersProps> = ({costumer_id}) => {
     const { data, error } = useAxios<IProduct[]>(`/account?costumer_id=${costumer_id}`)
 
     if(error) console.log(error);
-    if (!data) return <p>Loading...</p>
+    if (!data) return <Loading/>
 
-    if(data.length === 0) return <p className="text-grey-800 mt-3 font-weight-bold ">No orders for now!</p>
+    if(data.length === 0) return <p className="text-grey-800 mt-3 font-weight-bold ">Nothing purchased yet!</p>
 
     let total = 0.00;
     data.forEach((product:IProduct) => total += product.price)
