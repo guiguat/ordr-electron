@@ -37,9 +37,11 @@ const NavBar: React.FC = () => {
                 </li>
             </ul>
 
-            <a href="#/config" className="text-light nav-link nav-item">
-                <FiSettings size={18} className="mr-2"/> Settings
-            </a>
+            <div className="nav-item">
+                <a href="#/config" className="text-light nav-link">
+                    <FiSettings size={18} className="mr-2"/> Settings
+                </a>
+            </div>
         </nav>
   
     );
