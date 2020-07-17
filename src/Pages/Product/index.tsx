@@ -2,10 +2,9 @@ import React from 'react';
 
 import './Products.scss';
 import { FiPlus, FiEdit, FiTrash2, FiShoppingBag } from 'react-icons/fi';
-import CreateUpdate from './CreateUpdate';
+import Create from './Create';
 import { useForms } from '../../Contexts/Forms';
 import { useApi } from '../../Contexts/Api';
-import Stock from './Stock';
 interface IProductsData{
     id: number,
     name: string,
@@ -32,6 +31,7 @@ const Products: React.FC = () => {
                 if(prodSelected.id){
                     const response = await Api.delete(`/product?id=${prodSelected.id}`)
                     alert(response.data.message);
+                    clear();
                 }
                 else throw new Error("Please select a product from the table below");
                 
@@ -39,6 +39,43 @@ const Products: React.FC = () => {
                 alert("An error occurred when trying to reach the server:\n"+e)
             }
         }
+    }
+
+    async function handleStockSubmit(){
+        try {    
+            const resp = await Api.put("/product", { 
+                id: prodSelected.id? prodSelected.id.toString() : "0",
+                stock:prodSelected.stock? prodSelected.stock.toString() : "0"
+            });
+            alert(resp.data.message);
+            clear();
+        } catch (error) {
+            alert("An error occurred when trying to reach the server:\n"+error)
+        }
+    }
+
+    async function handleUpdateSubmit(event:any){
+        event.preventDefault();
+        const data = {
+            id:prodSelected.id??0,
+            name: prodSelected.name??"",
+            price: prodSelected.price??0,
+            stock: prodSelected.stock??0,
+            type: prodSelected.type,
+        }
+        try{
+
+            const res = await Api.put("/product", data);
+            alert(res.data.message);
+            clear()
+        }
+        catch(error){
+            alert("An error occurred when trying to reach the server: \n"+ error);
+        }
+    }
+
+    function clear(){
+        setProdSelected({} as IProductsData);
     }
 
     return (
@@ -53,7 +90,7 @@ const Products: React.FC = () => {
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <CreateUpdate type="create"/>
+                        <Create/>
                     </div>
                 </div>
             </div>
@@ -67,7 +104,57 @@ const Products: React.FC = () => {
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <CreateUpdate type="update"/>
+                        {/* UpdateForm */}
+                        <form onSubmit={handleUpdateSubmit} className="container px-4 rounded-lg">
+                            <div className="modal-body">
+                                <div className="form-group">
+                                    <label htmlFor="id">Id *</label>
+                                    <input type="number" required value={prodSelected.id??0}
+                                    onChange={event=>setProdSelected({ ...prodSelected, id: parseInt(event.target.value) })}
+                                    className="form-control" id="id"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="name">Name *</label>
+                                    <input type="text" required value={prodSelected.name??""}
+                                    onChange={event=>setProdSelected({ ...prodSelected, name: event.target.value })}
+                                    className="form-control" id="name"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="price">Price *</label>
+                                    <input type="number" value={prodSelected.price??0.00} 
+                                    required 
+                                    onChange={event=>setProdSelected({...prodSelected, price: parseFloat(event.target.value)})} 
+                                    className="form-control" id="price"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="stock">Stock count *</label>
+                                    <input type="number"
+                                    value={prodSelected.stock??0} 
+                                    required onChange={event=>setProdSelected({...prodSelected, stock: parseInt(event.target.value)})}
+                                    className="form-control" id="stock"
+                                    />
+                                </div>
+                                <div className="form-group mb-3">
+                                    <label className="mr-2" htmlFor="typeCheck">Type: </label>
+                                    <select 
+                                    className="form-control"
+                                    value={prodSelected.type}
+                                    onChange={event => setProdSelected({ ...prodSelected, type: event.target.value??"" })}>
+                                        <option value="">Product</option>
+                                        <option value="dish">Dish</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="submit" className="btn btn-primary">
+                                    <FiEdit size={18}  className="mr-2 mb-1"/>
+                                    Update
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -81,7 +168,31 @@ const Products: React.FC = () => {
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <Stock/>
+                        {/* Stock form */}
+                        <form onSubmit={handleStockSubmit} className="container px-4 rounded-lg">
+                            <div className="modal-body">
+                                <div className="form-group">
+                                    <label htmlFor="id">Id *</label>
+                                    <input type="number" required value={prodSelected.id}
+                                    onChange={event=>setProdSelected({...prodSelected, id: parseInt(event.target.value)})}
+                                    className="form-control" id="id"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="Stock">Stock count *</label>
+                                    <input type="number" required value={prodSelected.stock}
+                                    onChange={event=>setProdSelected({...prodSelected, stock: parseInt(event.target.value)})}
+                                    className="form-control" id="Stock"
+                                    />
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="submit" className="btn btn-info">
+                                    <FiShoppingBag size={18}  className="mr-2 mb-1"/>
+                                    Stock
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
