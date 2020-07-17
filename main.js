@@ -3,12 +3,16 @@ const { app, BrowserWindow } = require('electron')
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    minWidth:770,
+    width: 1120,
+    height: 700,
+    minWidth:950,
+    minHeight:700,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    autoHideMenuBar:true,
+    icon: "./icon.ico",
+    title: "Ordr"
   })
 
 
