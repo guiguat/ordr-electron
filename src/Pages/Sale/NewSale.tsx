@@ -3,7 +3,7 @@ import { FiArrowLeft, FiDollarSign, FiPlus } from 'react-icons/fi';
 import Loading from '../../Components/Loading';
 import { useApi } from '../../Contexts/Api';
 import { useAuth } from '../../Contexts/Auth';
-
+import { useHistory } from "react-router-dom";
 
 interface Product{
     id: number;
@@ -32,6 +32,7 @@ const NewSale: React.FC = () => {
 	const [table_num, setTable_Num] = useState(0);
 	const [payment, setPayment] = useState("");
 	let totalCompra = 0.00;
+	let history = useHistory();
 
 	function handleSelectSubmit(event:any){
 		event.preventDefault();	
@@ -87,6 +88,7 @@ const NewSale: React.FC = () => {
 			} catch (error) {
 				console.log("An error occurred when trying to reach the server:\n"+error)
 			}
+			history.push("/sale")
 		}
 		else{
 			alert("Please fill the inputs properly")
