@@ -109,10 +109,8 @@ const NewSale: React.FC = () => {
 
 				<form onSubmit={handleSelectSubmit}>
 					<div className="d-flex align-items-center">
-						<div className="input-group m-0">
-							<div className="input-group-prepend">
-								<label className="m-0 align-self-center mr-2" htmlFor="select">Select:</label>
-							</div>
+						<div className="m-0">
+							<label htmlFor="select">Select:</label>
 							<select className="form-control m-0" 
 							id="select"
 							value={selectValue}
@@ -128,21 +126,16 @@ const NewSale: React.FC = () => {
 								}
 							</select>
 						</div>
-						<div className="input-group mx-3">
-							<div className="input-group-prepend">
-								<label  className="m-0 align-self-center mr-2"  htmlFor="amount">Amount:</label>
-							</div>
+						<div className="mx-3">
+							<label htmlFor="amount">Amount:</label>
 							<input type="number" className="form-control" id="amount"
 							value={amount.toString()}
 							onChange={e => setAmount(parseInt(e.target.value))}
 							/>
 						</div>
-
-
-						<button className="btn btn-primary m-0" type="submit">
+						<button className="btn btn-primary mt-4	" type="submit">
 							<FiPlus size={18}/> 
 						</button>
-
 					</div>
 				</form>
 
@@ -185,7 +178,7 @@ const NewSale: React.FC = () => {
 					<form onSubmit={handleSubmit}>
 						<div className="form-group d-flex border-bottom pb-4">
 							<div className="d-flex flex-column">
-								<label className="m-0" htmlFor="pay">Payment Method:</label>
+								<label className="mx-0" htmlFor="pay">Payment Method:</label>
 								<select id="pay" 
 								value={payment}
 								onChange={e=>setPayment(e.target.value)}
@@ -197,7 +190,7 @@ const NewSale: React.FC = () => {
 								</select>
 							</div>
 							<div className="d-flex flex-column mx-5">
-								<label className="m-0" htmlFor="table">Table:</label>
+								<label className="mx-0" htmlFor="table">Table:</label>
 								<input type="number" 
 								className="form-control" 
 								value={table_num}
@@ -205,7 +198,7 @@ const NewSale: React.FC = () => {
 								id="table"/>
 							</div>
 							<div className="d-flex flex-column">
-								<label className="m-0" htmlFor="costumer">Costumer:</label>
+								<label className="mx-0" htmlFor="costumer">Costumer:</label>
 								<select id="costumer" 
 								value={costumer_id}
 								onChange={e => setCostumer_Id(parseInt(e.target.value))}

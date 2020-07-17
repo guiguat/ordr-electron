@@ -30,8 +30,8 @@ const SaleItem: React.FC<SaleItemProps> = ({data}) => {
                     <div key={sale.id} className="container p-2 mb-3 border-bottom">
                         <div className="flex-row p-0 mb-2">
                             <span className="font-weight-bold">{sale.date_time}</span>
-                            <span className="font-weight-bold text-secondary mx-3">Seller: {sale.seller_name}</span>
-                            <span className="font-weight-bold text-secondary">Table: {sale.table_num}</span>
+                            <span className="text-secondary mx-3">Seller: {sale.seller_name}</span>
+                            <span className="text-secondary">Table: {sale.table_num}</span>
                         </div>
                         <table className="table table-sm">
                             <caption>List of sold products</caption>
