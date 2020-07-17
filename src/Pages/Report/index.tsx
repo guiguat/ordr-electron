@@ -32,7 +32,7 @@ const Report: React.FC = () => {
 
     return (  
         <>
-            <h1 className="mb-1">Report</h1>
+            <h3 className="mb-1">Report</h3>
 
             <button 
                 className="btn shadow-sm btn-success my-3"

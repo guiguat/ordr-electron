@@ -65,7 +65,7 @@ const Costumer: React.FC = () => {
 
     return (
         <>
-            <h1 className="mb-4">Costumer</h1>
+            <h3 className="mb-4">Costumer</h3>
             <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#modalNewCostumer">
                 <FiUserPlus/>  Register New
             </button>
