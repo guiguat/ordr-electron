@@ -39,7 +39,7 @@ const NewSale: React.FC = () => {
 		if(selectValue !== 0 && selectValue && amount !== 0 && amount){
 			let selectedProdAux = selectedProducts;
 			const prod = productData.data?.filter(product => product.id === selectValue);
-			if(prod){
+			if(prod && prod?.length > 0){
 				for (let i = 0; i < amount; i++) {
 					selectedProdAux.push(prod[0])
 				}
@@ -60,35 +60,25 @@ const NewSale: React.FC = () => {
 					seller_name: currentUser?.displayName,
 					table_num
 				}		
-				await Api.post("/sale", saleData)
-			} catch (error) {
-				alert("An error occurred when trying to reach the server:\n"+error)
-			}
-			//send to costumer account
-			try {
 				const accountData = {
 					products: selectedProducts,
 					costumer_id
 				}		
-				await Api.post("/account", accountData)
-			} catch (error) {
-				console.log("An error occurred when trying to reach the server:\n"+error)
-			}
-			// stock negative stock
-	
-			//send to report
-			try {
 				const reportData = {
 					addDebit: payment === "debit"?totalCompra:0,
 					addCredit:payment === "credit"?totalCompra:0,
 					addCash:payment === "cash"?totalCompra:0,
 				}		
-				const res = await Api.put("/report", reportData)
+				const res = await Api.post("/sale", { 
+					saleData,
+					accountData,
+					reportData
+				 });
 				alert(res.data.message);
+				history.push("/sale");
 			} catch (error) {
-				console.log("An error occurred when trying to reach the server:\n"+error)
+				alert("An error occurred when trying to reach the server:\n"+error)
 			}
-			history.push("/sale")
 		}
 		else{
 			alert("Please fill the inputs properly")
