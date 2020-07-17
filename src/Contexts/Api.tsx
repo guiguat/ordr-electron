@@ -4,6 +4,7 @@ import Axios, { AxiosInstance } from "axios";
 
 interface IApiContext {
     Api: AxiosInstance;
+    baseURL: string;
     setBaseURL(url:string):void,
     useAxios<Data=any, Error=any>(url:string): IuseAxios<Data, Error>;
 }
@@ -16,7 +17,19 @@ export const ApiContext = React.createContext<IApiContext>({} as IApiContext);
 
 export const ApiProvider: React.FC = ({ children }) => {
 
-    const [baseURL, setBaseURL] = useState("http://localhost:3333");
+    const [baseURL, setFinalBaseURL] = useState(getBaseUrl());
+
+    function setBaseURL(url:string){
+        if(url){
+            localStorage.setItem("Ordr@baseUrl", url);
+            setFinalBaseURL(url);
+        }
+    }
+
+    function getBaseUrl(){
+        const baseurl = localStorage.getItem("Ordr@baseUrl");
+        return baseurl??"http://localhost:3333";
+    }
 
     const Api = Axios.create({
         baseURL
@@ -33,7 +46,7 @@ export const ApiProvider: React.FC = ({ children }) => {
     }
 
     return (
-        <ApiContext.Provider value={ { Api, setBaseURL, useAxios } }>
+        <ApiContext.Provider value={ { Api, baseURL, setBaseURL, useAxios } }>
             {children}
         </ApiContext.Provider>
     );
