@@ -162,12 +162,10 @@ const Users: React.FC = () => {
                 </div>
             </div>
             {/* end modals */}
-
-            <h3>Users</h3>
-            <div className="container bg-light rounded-lg p-5 mt-3">
-                <h3  className="text-dark font-weight-bold mb-3">Current User</h3>
-                <h4 className="text-dark">Name: {currentUser?.displayName}</h4>
-                <h4 className="text-dark">Email: {currentUser?.email}</h4>
+            <div className="container bg-light rounded-lg p-4">
+                <h3 className="font-weight-bold">Users</h3>
+                <h5>Name: {currentUser?.displayName}</h5>
+                <h5>Email: {currentUser?.email}</h5>
                 <div className="row">
                     <button className="btn btn-primary w-100 col mt-4 mx-3" data-toggle="modal" data-target="#newUserModal">
                         <FiUserPlus className="mr-3" />
