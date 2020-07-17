@@ -163,7 +163,7 @@ const Users: React.FC = () => {
             </div>
             {/* end modals */}
             <div className="container bg-light rounded-lg p-4">
-                <h3 className="font-weight-bold">Users</h3>
+                <h3 className="font-weight-bold">User</h3>
                 <h5>Name: {currentUser?.displayName}</h5>
                 <h5>Email: {currentUser?.email}</h5>
                 <div className="row">
