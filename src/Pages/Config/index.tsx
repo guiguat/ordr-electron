@@ -26,7 +26,7 @@ const Config: React.FC = () => {
             <input className="form-control" type="text" id="ip" value={baseUrl} onChange={e=>setBaseUrl(e.target.value)}/>
           </div>
           <button type="submit" className="btn btn-warning w-100">
-            <FiEdit size={18}/> Update
+            <FiEdit size={18} className="mr-2"/> Update
           </button>
         </form>
       </div>
