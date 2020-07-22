@@ -5,7 +5,7 @@ import { FiFilePlus } from 'react-icons/fi';
 import { useApi } from '../../Contexts/Api';
 
 const Create: React.FC = () => {
-    const {Api} = useApi();
+    const { Api } = useApi();
     const [Stock, setStock] = useState("0");
     const [Name, setName] = useState("");
     const [Price, setPrice] = useState("0.00");
@@ -74,7 +74,7 @@ const Create: React.FC = () => {
                 </div>
             </div>
             <div className="modal-footer">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" disabled={!Stock || !Name || !Price} className="btn btn-primary">
                     <FiFilePlus size={18}  className="mr-2 mb-1"/>
                     Create
                 </button>

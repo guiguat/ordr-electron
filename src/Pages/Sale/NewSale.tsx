@@ -125,7 +125,10 @@ const NewSale: React.FC = () => {
 							onChange={e => setAmount(parseInt(e.target.value))}
 							/>
 						</div>
-						<button className="btn btn-primary mt-4	" type="submit">
+						<button 
+						 disabled={ !amount || !selectValue }
+						 className="btn btn-primary mt-4"
+						 type="submit">
 							<FiPlus size={18}/> 
 						</button>
 					</div>
@@ -207,7 +210,7 @@ const NewSale: React.FC = () => {
 								</select>
 							</div>
 						</div>
-						<button className="btn btn-primary" type="submit">
+						<button className="btn btn-primary" disabled={ !payment || !table_num || (selectedProducts.length === 0) } type="submit">
 							<FiDollarSign size={18} className="mr-2"/> Finish
 						</button>
 					</form>

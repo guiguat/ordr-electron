@@ -4,8 +4,8 @@ import { useApi } from '../../Contexts/Api';
 import Users from '../User';
 
 const Config: React.FC = () => {
-  const {setBaseURL, baseURL} = useApi();
-  const [baseUrl, setBaseUrl] = useState(baseURL)
+  const {setBaseURL, baseURL} = useApi(); //previous baseURL
+  const [baseUrl, setBaseUrl] = useState(baseURL) //This instance baseURL
 
   function handleChangeUrl(){
     const res = window.confirm("DANGER: Are you sure you want to change the default settings?");
@@ -25,7 +25,9 @@ const Config: React.FC = () => {
             <label htmlFor="ip"><h5>Server IP</h5></label>
             <input className="form-control" type="text" id="ip" value={baseUrl} onChange={e=>setBaseUrl(e.target.value)}/>
           </div>
-          <button type="submit" className="btn btn-warning w-100">
+          <button type="submit" 
+          disabled={baseURL === baseUrl}
+          className="btn btn-warning w-100">
             <FiEdit size={18} className="mr-2"/> Update
           </button>
         </form>

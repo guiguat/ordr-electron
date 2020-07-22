@@ -100,7 +100,7 @@ const Products: React.FC = () => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="updateModalLabel">Update Product</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" onClick={()=>clear()} className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -149,7 +149,7 @@ const Products: React.FC = () => {
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="submit" className="btn btn-primary">
+                                <button type="submit" disabled={!prodSelected.name || !prodSelected.price || !prodSelected.id} className="btn btn-primary">
                                     <FiEdit size={18}  className="mr-2 mb-1"/>
                                     Update
                                 </button>
@@ -164,7 +164,7 @@ const Products: React.FC = () => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="stockModalLabel">Stock Product</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" onClick={()=>clear()} className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -187,7 +187,7 @@ const Products: React.FC = () => {
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="submit" className="btn btn-info">
+                                <button type="submit" disabled={!prodSelected.id} className="btn btn-info">
                                     <FiShoppingBag size={18}  className="mr-2 mb-1"/>
                                     Stock
                                 </button>
@@ -221,6 +221,7 @@ const Products: React.FC = () => {
                     <li className="col col-md-2">
                         <button
                         className="btn shadow-sm btn-danger"
+                        disabled={!prodSelected.id}
                         onClick={delProduct}
                         >
                             <FiTrash2 size={18} className="mb-1 mr-2"/>

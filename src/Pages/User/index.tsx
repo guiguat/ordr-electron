@@ -63,7 +63,10 @@ const Users: React.FC = () => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="newUserModalLabel">New User</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" 
+                            onClick={()=>clear()}
+                            className="close" 
+                            data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -91,7 +94,10 @@ const Users: React.FC = () => {
                                     />
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="submit" className="btn btn-primary">
+                                    <button 
+                                     type="submit" 
+                                     className="btn btn-primary"
+                                     disabled={!email || !password}>
                                         <FiUserPlus className="mr-2"/>
                                         Create
                                     </button>
@@ -105,8 +111,9 @@ const Users: React.FC = () => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="manageModalLabel">New User</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <h5 className="modal-title" id="manageModalLabel">Manage Users</h5>
+                            <button  onClick={()=>clear()} 
+                            type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -145,11 +152,13 @@ const Users: React.FC = () => {
                                 <div className="modal-footer">
                                     <button onClick={()=>setFormType("up")} 
                                     type="submit" className="btn btn-warning mr-3"
+                                    disabled={!email || !password}
                                     >
                                         <FiEdit className="mr-2"/>
                                         Update
                                     </button>
                                     <button onClick={()=>setFormType("del")} 
+                                    disabled={!email || !password}
                                     type="submit" className="btn btn-danger"
                                     >
                                         <FiUserX className="mr-2"/>

@@ -11,9 +11,9 @@ interface ICostumer{
 const Costumer: React.FC = () => {
     
     const {Api, useAxios} = useApi();
+    const [costumer, setCostumer] = useState<ICostumer>({} as ICostumer);
     const [name, setName] = useState("");
     const [document, setDocument] = useState("");
-    const [costumerId, setCostumerId] = useState(0);
 
     const {data, error} = useAxios<ICostumer[]>("/costumer");
 
@@ -39,16 +39,18 @@ const Costumer: React.FC = () => {
     async function updateCostumer(event:any){
         event.preventDefault();
         try {
-            const data = {
-                id:costumerId,
-                name,
-                document
+            if(costumer && costumer.id){
+                const data = {
+                    id:costumer.id,
+                    name,
+                    document
+                }
+                const response = await Api.put("/costumer", data);
+                alert(response.data.message);
+                setName("");
+                setDocument("");
+                setCostumer({} as ICostumer);
             }
-            const response = await Api.put("/costumer", data);
-            alert(response.data.message);
-            setName("");
-            setDocument("");
-            setCostumerId(0);
         } catch (e) {
             alert("An error occurred when trying to reach the server:\n"+e);
         }
@@ -97,7 +99,10 @@ const Costumer: React.FC = () => {
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button className="btn btn-primary w-100" type="submit">
+                                <button 
+                                className="btn btn-primary w-100"
+                                disabled={ !name || !document }
+                                type="submit">
                                     <FiUserPlus className="mb-1 mr-2"/> Create
                                 </button>
                             </div>
@@ -111,7 +116,12 @@ const Costumer: React.FC = () => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="editCostumerModalLabel">Update info</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <button 
+                            type="button" 
+                            onClick={()=>{setName(''); setCostumer({} as ICostumer); setDocument('')}}
+                            className="close" 
+                            data-dismiss="modal" 
+                            aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -133,7 +143,10 @@ const Costumer: React.FC = () => {
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button className="btn btn-warning w-100" type="submit">
+                                <button 
+                                disabled={ !name || !document }
+                                className="btn btn-warning w-100" 
+                                type="submit">
                                     <FiEdit className="mb-1 mr-2"/> Update
                                 </button>
                             </div>
@@ -156,8 +169,12 @@ const Costumer: React.FC = () => {
                                         <div className="row p-0">
                                             <button className="btn p-0 mr-1"
                                              data-toggle="modal" data-target="#editCostumerModal"
-                                             onClick={e => setCostumerId(costumer.id)}
-                                             >
+                                             onClick={e =>{
+                                                    setCostumer(costumer);
+                                                    setName(costumer.name);
+                                                    setDocument(costumer.document)
+                                                }
+                                            }>
                                                 <FiEdit className="text-warning" size={24}/>
                                             </button>
                                             <button className="btn p-0" onClick={()=>deleteCostumer(costumer.id)}>
