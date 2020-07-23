@@ -5,13 +5,13 @@ import { FiPlus, FiEdit, FiTrash2, FiShoppingBag } from 'react-icons/fi';
 import Create from './Create';
 import { useForms } from '../../Contexts/Forms';
 import { useApi } from '../../Contexts/Api';
-import { IProductsData } from '../../models';
+import { IProduct } from './models';
 
 const Products: React.FC = () => {
     const { setProdSelected, prodSelected } = useForms();
     const {Api, useAxios} = useApi();
 
-    const { data, error } = useAxios<IProductsData[]>("/product")
+    const { data, error } = useAxios<IProduct[]>("/product")
 
     if (error) alert("An error occurred when trying to reach the server:\n"+error);
 
@@ -69,7 +69,7 @@ const Products: React.FC = () => {
     }
 
     function clear(){
-        setProdSelected({} as IProductsData);
+        setProdSelected({} as IProduct);
     }
 
     return (
@@ -247,7 +247,7 @@ const Products: React.FC = () => {
                 <tbody className="table-products">
                     {
                         data?.map(
-                            (product:IProductsData)=>(
+                            (product:IProduct)=>(
                                 <tr className={`${prodSelected.id === product.id? "bg-secondary text-white" :""}`}
                                 onClick={()=>setProdSelected(product)}
                                 key={product.id}
