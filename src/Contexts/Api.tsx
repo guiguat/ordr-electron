@@ -1,17 +1,7 @@
 import React, {useState, useContext} from 'react';
 import useSWR from 'swr';
-import Axios, { AxiosInstance } from "axios";
-
-interface IApiContext {
-    Api: AxiosInstance;
-    baseURL: string;
-    setBaseURL(url:string):void,
-    useAxios<Data=any, Error=any>(url:string): IuseAxios<Data, Error>;
-}
-interface IuseAxios<Data, Error>{
-    data: Data | undefined;
-    error: Error | undefined
-}
+import Axios from "axios";
+import { IApiContext } from './models/Api';
 
 export const ApiContext = React.createContext<IApiContext>({} as IApiContext);
 

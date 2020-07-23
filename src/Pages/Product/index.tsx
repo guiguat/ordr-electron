@@ -5,13 +5,7 @@ import { FiPlus, FiEdit, FiTrash2, FiShoppingBag } from 'react-icons/fi';
 import Create from './Create';
 import { useForms } from '../../Contexts/Forms';
 import { useApi } from '../../Contexts/Api';
-interface IProductsData{
-    id: number,
-    name: string,
-    price: number,
-    stock: number,
-    type: string
-}
+import { IProductsData } from '../../models';
 
 const Products: React.FC = () => {
     const { setProdSelected, prodSelected } = useForms();

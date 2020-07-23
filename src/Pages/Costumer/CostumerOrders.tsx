@@ -2,19 +2,11 @@ import React from 'react';
 import { FiInbox } from 'react-icons/fi';
 import Loading from '../../Components/Loading';
 import { useApi } from '../../Contexts/Api';
-
-interface ICostumerOrdersProps{
-    costumer_id:number
-}
-
-interface IProduct{
-    order:string,
-    price:number
-}
+import { ICostumerOrdersProps, IOrderProduct } from './models';
 
 const CostumerOrders: React.FC<ICostumerOrdersProps> = ({costumer_id}) => {
     const { useAxios, Api } = useApi();
-    const { data, error } = useAxios<IProduct[]>(`/account?costumer_id=${costumer_id}`)
+    const { data, error } = useAxios<IOrderProduct[]>(`/account?costumer_id=${costumer_id}`)
 
     if(error) console.log(error);
     if (!data) return <Loading/>
@@ -22,7 +14,7 @@ const CostumerOrders: React.FC<ICostumerOrdersProps> = ({costumer_id}) => {
     if(data.length === 0) return <p className="text-grey-800 mt-3 font-weight-bold ">Nothing purchased yet!</p>
 
     let total = 0.00;
-    data.forEach((product:IProduct) => total += product.price)
+    data.forEach((product:IOrderProduct) => total += product.price)
     
     async function handleFinishPurchase(){
         try{
@@ -48,7 +40,7 @@ const CostumerOrders: React.FC<ICostumerOrdersProps> = ({costumer_id}) => {
                 <tbody>
                     {
                         data?.map(
-                            (product:IProduct, index)=>(
+                            (product:IOrderProduct, index)=>(
                                 <tr key={index}>
                                     <td>{product.order}</td>
                                     <td>{`R$${product.price.toFixed(2)}`}</td>

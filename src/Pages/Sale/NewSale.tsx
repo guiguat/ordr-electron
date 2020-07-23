@@ -4,27 +4,15 @@ import Loading from '../../Components/Loading';
 import { useApi } from '../../Contexts/Api';
 import { useAuth } from '../../Contexts/Auth';
 import { useHistory } from "react-router-dom";
-
-interface Product{
-    id: number;
-    name: string;
-    price: number;
-    stock: number;
-    type: string
-}
-
-interface Costumer{
-    id: number,
-    name: string;
-    document: string
-}
+import { IProduct } from '../Product/models';
+import { ICostumer } from '../Costumer/models';
 
 const NewSale: React.FC = () => {
 	const { currentUser } = useAuth()
 	const { useAxios, Api } = useApi();
-	const productData = useAxios<Product[]>("/product");
-	const costumerData = useAxios<Costumer[]>("/costumer");
-	const [selectedProducts, setSelectedProducts] = useState<Product[]>([])
+	const productData = useAxios<IProduct[]>("/product");
+	const costumerData = useAxios<ICostumer[]>("/costumer");
+	const [selectedProducts, setSelectedProducts] = useState<IProduct[]>([])
 	const [selectValue, setSelectValue] = useState(0);
 	const [amount, setAmount] = useState(0);
 	const [paidVal, setPaidVal] = useState(0.00);
@@ -109,7 +97,7 @@ const NewSale: React.FC = () => {
 							onChange={(e)=>setSelectValue(parseInt(e.target.value))}>
 								<option value={0}>Choose a product/dish</option>
 								{
-									productData.data?.map((product:Product)=>(
+									productData.data?.map((product:IProduct)=>(
 										<option 
 										key={`product@${product.id}`} value={product.id.toString()}>{
 											product.name}
@@ -144,7 +132,7 @@ const NewSale: React.FC = () => {
 					<tbody>
 						{
 							selectedProducts?.map(
-								(product:Product, index) =>{
+								(product:IProduct, index) =>{
 									totalCompra += product?.price?product.price:0;
 									return (
 										<tr key={index}>
@@ -200,7 +188,7 @@ const NewSale: React.FC = () => {
 								className="form-control">
 									<option value={0}>Choose a costumer</option>
 									{
-										costumerData.data.map((costumer:Costumer)=>(
+										costumerData.data.map((costumer:ICostumer)=>(
 											<option value={costumer.id}
 											 key={costumer.id}>
 												{costumer.name}

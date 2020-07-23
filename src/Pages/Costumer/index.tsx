@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { useApi } from '../../Contexts/Api';
 import {FiUserPlus, FiTrash2, FiEdit} from 'react-icons/fi'
 import CostumerOrders from './CostumerOrders';
-interface ICostumer{
-    id:number,
-    name:string,
-    document:string
-}
+import { ICostumer } from './models';
 
 const Costumer: React.FC = () => {
     

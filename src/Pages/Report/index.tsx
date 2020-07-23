@@ -2,7 +2,8 @@ import React from 'react';
 import { FiFilePlus } from 'react-icons/fi';
 import { useApi } from '../../Contexts/Api';
 import "../../custom.scss"
-interface IReportData{
+
+export interface IReportData{
     id:number,
     dateTime:string
     debit:number

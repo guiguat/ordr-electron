@@ -1,23 +1,17 @@
 import React, {useState, useContext} from 'react';
+import {IProduct} from '../Pages/Product/models';
 
-interface IFormsContext {
-    prodSelected:IProductsData;
-    setProdSelected(product:IProductsData):void;
+export interface IFormsContext {
+    prodSelected:IProduct;
+    setProdSelected(product:IProduct):void;
 }
 
-export interface IProductsData{
-    id: number,
-    name: string,
-    price: number,
-    stock: number,
-    type: string
-}
 
 export const FormsContext = React.createContext<IFormsContext>({} as IFormsContext);
 
 export const FormsProvider: React.FC = ({ children }) => {
 
-    const [prodSelected, setProdSelected] = useState({} as IProductsData);
+    const [prodSelected, setProdSelected] = useState({} as IProduct);
 
     return (
         <FormsContext.Provider value={ { 

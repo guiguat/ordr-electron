@@ -1,30 +1,12 @@
 import React from 'react';
+import { IProduct } from '../Product/models';
+import { ISale, ISaleItemProps } from './models';
 
-interface Product{
-    id: number;
-    name: string;
-    price: number;
-    stock: number;
-    type: string
-}
-
-interface Sale{
-    id:number;
-    products:Product[];
-    seller_name: string,
-    table_num: number;
-    date_time: string
-}
-
-interface SaleItemProps{
-    data: Sale[]
-}
-
-const SaleItem: React.FC<SaleItemProps> = ({data}) => {
+const SaleItem: React.FC<ISaleItemProps> = ({data}) => {
     return (
         <div className="container bg-light rounded-lg p-2 pt-3 mt-3">
             {
-                data.map((sale: Sale)=>{
+                data.map((sale: ISale)=>{
                     let total = 0;
                     return(
                     <div key={sale.id} className="container p-2 mb-3 border-bottom">
@@ -44,7 +26,7 @@ const SaleItem: React.FC<SaleItemProps> = ({data}) => {
                             <tbody>
                                 {
                                     sale.products?.map(
-                                        (product:Product,index)=>{
+                                        (product:IProduct,index)=>{
                                             total += product.price;
                                             return(
                                             <tr key={`${product.id}@${index}`}>

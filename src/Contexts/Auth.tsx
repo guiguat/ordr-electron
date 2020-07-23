@@ -1,27 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { User } from 'firebase';
 import app from "../services/firebase";
-
-interface IAuthContext {
-    currentUser?: User | null;
-    LogOut():void;
-    SignUp(signUpData: ISignUpData):void;
-    DeleteUser(email:string, password:string):void;
-    UpdateUser(data:IUpdateData):void;
-    LogIn(email:string, password:string):void;
-}
-interface ISignUpData{
-    email:string;
-    password:string;
-    name:string;
-}
-interface IUpdateData{
-    email:string;
-    password:string;
-    newName?:string|null;
-    newEmail?:string|null;
-    newPassword?:string|null;
-}
+import { IAuthContext, ISignUpData, IUpdateData } from './models/Auth';
 
 export const AuthContext = React.createContext<IAuthContext>({} as IAuthContext);
 
