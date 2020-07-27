@@ -18,13 +18,12 @@ function createWindow () {
     title: "Ordr"
   })
 
-
+  console.log(process.env)
   // and load the index.html of the app.
-  if(process.env.NODE_ENV === 'development'){
-    win.loadURL(reactDevURL)
-  } else{
-    win.loadFile(reactBuildDir)
-  }
+  //for development:
+  win.loadURL(reactDevURL)
+  // for production:
+  // win.loadFile(reactBuildDir)
 }
 
 // This method will be called when Electron has finished
