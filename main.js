@@ -1,5 +1,8 @@
 const { app, BrowserWindow } = require('electron')
 
+const reactBuildDir = './build/index.html';
+const reactDevURL = 'http://localhost:3000';
+
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
@@ -17,7 +20,11 @@ function createWindow () {
 
 
   // and load the index.html of the app.
-  win.loadFile('./build/index.html')
+  if(process.env.NODE_ENV === 'development'){
+    win.loadURL(reactDevURL)
+  } else{
+    win.loadFile(reactBuildDir)
+  }
 }
 
 // This method will be called when Electron has finished
