@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiFilePlus } from 'react-icons/fi';
+import Loading from '../../Components/Loading';
 import { useApi } from '../../Contexts/Api';
 import "../../custom.scss"
 
@@ -20,7 +21,7 @@ const Report: React.FC = () => {
 
     if(error) alert("An error occurred when trying to reach the server:\n"+error);
 
-    if(!data) return <p>Loading...</p>
+    if(!data) return <Loading/>
 
     async function openReport(){
         try {

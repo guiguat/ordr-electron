@@ -3,6 +3,7 @@ import { useApi } from '../../Contexts/Api';
 import {FiUserPlus, FiTrash2, FiEdit} from 'react-icons/fi'
 import CostumerOrders from './CostumerOrders';
 import { ICostumer } from './models';
+import Loading from '../../Components/Loading';
 
 const Costumer: React.FC = () => {
     
@@ -14,7 +15,7 @@ const Costumer: React.FC = () => {
     const {data, error} = useAxios<ICostumer[]>("/costumer");
 
     if(error) alert("An error occurred when trying to reach the server:\n"+error)
-    if(!data) return <p>Loading...</p>
+    if(!data) return <Loading/>
 
     async function createNewCostumer(event:any){
         event.preventDefault();

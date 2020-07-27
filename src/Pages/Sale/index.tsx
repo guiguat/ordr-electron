@@ -10,15 +10,7 @@ const Sale: React.FC = () => {
     const {useAxios} = useApi()
     const { data, error } = useAxios<ISale[]>("/sale"); 
     if (error) alert("An error occurred when trying to reach the server:\n"+error);
-    if(!data) return (
-        <>
-            <h3>Sale</h3>
-            <a href="#/sale/new" className="btn btn-primary m-3.">
-                <FiPlus size={18} className="mr-2"/> New sale
-            </a>
-            <Loading/>
-        </>
-    )
+    if(!data) return <Loading/>
 
     return (
         <>

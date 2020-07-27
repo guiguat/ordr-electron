@@ -6,6 +6,7 @@ import Create from './Create';
 import { useForms } from '../../Contexts/Forms';
 import { useApi } from '../../Contexts/Api';
 import { IProduct } from './models';
+import Loading from '../../Components/Loading';
 
 const Products: React.FC = () => {
     const { setProdSelected, prodSelected } = useForms();
@@ -15,7 +16,7 @@ const Products: React.FC = () => {
 
     if (error) alert("An error occurred when trying to reach the server:\n"+error);
 
-    if(!data) return <p>Loading...</p>
+    if(!data) return <Loading/>
 
     async function delProduct(){
         const answer = window.confirm("Do you really want to delete "+prodSelected.name+" from the database?")
