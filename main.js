@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require('electron')
 
-const reactBuildDir = './build/index.html';
+//const reactBuildDir = './build/index.html'; //for production
 const reactDevURL = 'http://localhost:3000';
 
 function createWindow () {
@@ -18,7 +18,6 @@ function createWindow () {
     title: "Ordr"
   })
 
-  console.log(process.env)
   // and load the index.html of the app.
   //for development:
   win.loadURL(reactDevURL)
