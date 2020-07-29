@@ -12,6 +12,7 @@ const Costumer: React.FC = () => {
   const [name, setName] = useState("");
   const [document, setDocument] = useState("");
   const [showNewCostumer, setShowNewCostumer] = useState(false);
+  const [showEditCostumer, setShowEditCostumer] = useState(false);
 
   const { data, error } = useAxios<ICostumer[]>("/costumer");
 
@@ -50,6 +51,7 @@ const Costumer: React.FC = () => {
         setName("");
         setDocument("");
         setCostumer({} as ICostumer);
+        setShowEditCostumer(false);
       }
     } catch (e) {
       alert("An error occurred when trying to reach the server:\n" + e);
@@ -57,11 +59,14 @@ const Costumer: React.FC = () => {
   }
 
   async function deleteCostumer(id: number) {
-    try {
-      const response = await Api.delete(`/costumer?id=${id}`);
-      alert(response.data.message);
-    } catch (e) {
-      alert("An error occurred when trying to reach the server:\n" + e);
+    let res = window.confirm("Are you sure? This will delete all his records");
+    if (res) {
+      try {
+        const response = await Api.delete(`/costumer?id=${id}`);
+        alert(response.data.message);
+      } catch (e) {
+        alert("An error occurred when trying to reach the server:\n" + e);
+      }
     }
   }
 
@@ -125,72 +130,51 @@ const Costumer: React.FC = () => {
         </form>
       </Modal>
 
-      <div
-        className="modal fade"
-        id="editCostumerModal"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="editCostumerModalLabel"
-        aria-hidden="true"
+      <Modal
+        show={showEditCostumer}
+        onHide={() => {
+          setShowEditCostumer(false);
+        }}
       >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="editCostumerModalLabel">
-                Update info
-              </h5>
-              <button
-                type="button"
-                onClick={() => {
-                  setName("");
-                  setCostumer({} as ICostumer);
-                  setDocument("");
-                }}
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
+        <Modal.Header closeButton>
+          <Modal.Title>Update info</Modal.Title>
+        </Modal.Header>
+        <form onSubmit={updateCostumer}>
+          <Modal.Body>
+            <div className="form-group">
+              <label htmlFor="name">Name *</label>
+              <input
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="form-control form-control-sm"
+                id="name"
+              />
             </div>
-            <form onSubmit={updateCostumer}>
-              <div className="modal-body">
-                <div className="form-group">
-                  <label htmlFor="name">Name *</label>
-                  <input
-                    type="text"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="form-control form-control-sm"
-                    id="name"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="document">Document *</label>
-                  <input
-                    type="text"
-                    required
-                    value={document}
-                    onChange={(e) => setDocument(e.target.value)}
-                    className="form-control form-control-sm"
-                    id="document"
-                  />
-                </div>
-              </div>
-              <div className="modal-footer">
-                <button
-                  disabled={!name || !document}
-                  className="btn btn-warning w-100"
-                  type="submit"
-                >
-                  <FiEdit className="mb-1 mr-2" /> Update
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+            <div className="form-group">
+              <label htmlFor="document">Document *</label>
+              <input
+                type="text"
+                required
+                value={document}
+                onChange={(e) => setDocument(e.target.value)}
+                className="form-control form-control-sm"
+                id="document"
+              />
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <button
+              disabled={!name || !document}
+              className="btn btn-warning w-100"
+              type="submit"
+            >
+              <FiEdit className="mb-1 mr-2" /> Update
+            </button>
+          </Modal.Footer>
+        </form>
+      </Modal>
 
       <div className="container-fluid mt-3 p-0" id="costumers">
         {data?.map((costumer) => {
@@ -210,12 +194,11 @@ const Costumer: React.FC = () => {
                   <div className="row p-0">
                     <button
                       className="btn p-0 mr-1"
-                      data-toggle="modal"
-                      data-target="#editCostumerModal"
                       onClick={(e) => {
                         setCostumer(costumer);
                         setName(costumer.name);
                         setDocument(costumer.document);
+                        setShowEditCostumer(true);
                       }}
                     >
                       <FiEdit className="text-warning" size={24} />
