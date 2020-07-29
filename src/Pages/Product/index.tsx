@@ -144,8 +144,10 @@ const Products: React.FC = () => {
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="submit" disabled={!prodSelected.name || !prodSelected.price || !prodSelected.id} className="btn btn-primary">
-                                    <FiEdit size={18}  className="mr-2 mb-1"/>
+                                <button type="submit" 
+                                 disabled={!prodSelected.name || !prodSelected.price || !prodSelected.id}
+                                 className="btn btn-primary">
+                                    <FiEdit size={18} className="mr-2 mb-1"/>
                                     Update
                                 </button>
                             </div>
