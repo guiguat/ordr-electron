@@ -337,21 +337,32 @@ const Products: React.FC = () => {
           </tr>
         </thead>
         <tbody className="table-products">
-          {data?.map((product: IProduct) => (
+          {data?.map((p: IProduct) => (
             <tr
               className={`${
-                prodSelected.id === product.id ? "bg-secondary text-white" : ""
+                prodSelected.id === p.id ? "bg-secondary text-white" : ""
               }`}
-              onClick={() => setProdSelected(product)}
-              key={product.id}
+              onClick={() => setProdSelected(p)}
+              key={p.id}
             >
-              <th scope="row">{product.id}</th>
-              <td colSpan={2}>{product.name}</td>
-              <td colSpan={product.type === "" ? 1 : 2}>{product.price}</td>
-              <td className={`${product.type === "" ? "" : "d-none"}`}>
-                {product.stock}
+              <th scope="row">{p.id}</th>
+              <td
+                colSpan={2}
+                className={`${
+                  p.stock <= 0 && p.type.trim() === "" ? "text-danger" : null
+                }`}
+              >
+                {p.name}
               </td>
-              <td>{product.type === "" ? "" : "Yes"}</td>
+              <td colSpan={p.type === "" ? 1 : 2}>{p.price}</td>
+              <td
+                className={`${p.stock <= 0 ? "text-danger" : null} ${
+                  p.type.trim() === "" ? null : "d-none"
+                }`}
+              >
+                {p.stock}
+              </td>
+              <td>{p.type === "" ? "" : "Yes"}</td>
             </tr>
           ))}
         </tbody>
