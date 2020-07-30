@@ -93,7 +93,7 @@ const Create: React.FC<ICreateFormProps> = ({ onClose }) => {
       <div className="modal-footer">
         <button
           type="submit"
-          disabled={!Stock || !Name || !Price || !(Price === "0.00")}
+          disabled={!Stock || !Name || !Price}
           className="btn btn-primary"
         >
           <FiFilePlus size={18} className="mr-2 mb-1" />
