@@ -105,18 +105,14 @@ const NewSale: React.FC = () => {
                 onChange={(e) => setSelectValue(parseInt(e.target.value))}
               >
                 <option value={0}>Choose a product/dish</option>
-                {productData.data?.map((product: IProduct) => {
-                  console.log(product);
+                {productData.data?.map((p: IProduct) => {
                   if (
-                    (product.stock > 0 && product.type.trim() === "") ||
-                    product.type.trim() === "dish"
+                    (p.stock > 0 && p.type.trim() === "") ||
+                    p.type.trim() === "dish"
                   ) {
                     return (
-                      <option
-                        key={`product@${product.id}`}
-                        value={product.id.toString()}
-                      >
-                        {product.name}
+                      <option key={`product@${p.id}`} value={p.id.toString()}>
+                        {p.name}
                       </option>
                     );
                   }
@@ -151,12 +147,12 @@ const NewSale: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {selectedProducts?.map((product: IProduct, index) => {
-              totalCompra += product?.price ? product.price : 0;
+            {selectedProducts?.map((p: IProduct, index) => {
+              totalCompra += p?.price ? p.price : 0;
               return (
                 <tr key={index}>
-                  <td>{product?.name}</td>
-                  <td>{product?.price}</td>
+                  <td>{p?.name}</td>
+                  <td>{p?.price}</td>
                 </tr>
               );
             })}
@@ -224,9 +220,9 @@ const NewSale: React.FC = () => {
                   className="form-control"
                 >
                   <option value={0}>Choose a costumer</option>
-                  {costumerData.data.map((costumer: ICostumer) => (
-                    <option value={costumer.id} key={costumer.id}>
-                      {costumer.name}
+                  {costumerData.data.map((c: ICostumer) => (
+                    <option value={c.id} key={c.id}>
+                      {c.name}
                     </option>
                   ))}
                 </select>

@@ -177,17 +177,17 @@ const Costumer: React.FC = () => {
       </Modal>
 
       <div className="container-fluid mt-3 p-0" id="costumers">
-        {data?.map((costumer) => {
+        {data?.map((c: ICostumer) => {
           return (
             <div
-              key={costumer.id}
+              key={c.id}
               className="container-fluid mx-auto mb-4 bg-light rounded-lg p-4"
             >
               <div className="row mb-3">
                 <div className="col col-md-11">
-                  <h4 className="m-0">{costumer.name}</h4>
+                  <h4 className="m-0">{c.name}</h4>
                   <span className="text-secondary">
-                    Document ID: {costumer.document}
+                    Document ID: {c.document}
                   </span>
                 </div>
                 <div className="col col-md-1">
@@ -195,9 +195,9 @@ const Costumer: React.FC = () => {
                     <button
                       className="btn p-0 mr-1"
                       onClick={(e) => {
-                        setCostumer(costumer);
-                        setName(costumer.name);
-                        setDocument(costumer.document);
+                        setCostumer(c);
+                        setName(c.name);
+                        setDocument(c.document);
                         setShowEditCostumer(true);
                       }}
                     >
@@ -205,14 +205,14 @@ const Costumer: React.FC = () => {
                     </button>
                     <button
                       className="btn p-0"
-                      onClick={() => deleteCostumer(costumer.id)}
+                      onClick={() => deleteCostumer(c.id)}
                     >
                       <FiTrash2 className="text-danger" size={24} />
                     </button>
                   </div>
                 </div>
               </div>
-              <CostumerOrders costumer_id={costumer.id} />
+              <CostumerOrders costumer_id={c.id} />
             </div>
           );
         })}
