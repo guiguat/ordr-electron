@@ -1,44 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ORDR
+> This is a restaurant management system made with TypeScript React & Electron in the frontend and a TypeScript NodeJS Express REST API as the backend
 
-## Available Scripts
+![](https://img.shields.io/badge/React-v^16.13.1-blue)
+![](https://img.shields.io/badge/Firebase-Auth-orange)
+![](https://img.shields.io/badge/Electron-v^9.0.4-blue)
+![](https://img.shields.io/badge/Bootstrap-v4.5-purple)
 
-In the project directory, you can run:
+Ordr helps the manager to keep track of the money that is comming in and also the stock of every product in the database, with an intuitive and clean user interface to make the seller's life easier and quicker
 
-### `yarn start`
+![](header.png)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+this section will be available in the future soon...
 
-### `yarn test`
+## Development setup
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- ### Clone the API and this repository:
 
-### `yarn build`
+    ```sh
+    #cloning the API repository
+    git clone https://github.com/guiguat/Ordr-Api
+    #cloning this repository 
+    git clone https://github.com/guiguat/ordr-electron
+    ```
+- ### In one console, start the backend server:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```sh
+    cd Ordr-Api 
+    npm install
+    npm run dev
+    ```
+- ### In another console, start the react app:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    ```sh
+    cd ordr-electron
+    npm install
+    npm run start:web
+    ```
+    at this point you will be able to use the app in your browser
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- ### If you want to run it as an electron app:
 
-### `yarn eject`
+    ```sh
+    npm run start:electron
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Contributing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Fork it (<https://github.com/guiguat/ordr-electron/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## made with ♥ by Guilherme Guatura
