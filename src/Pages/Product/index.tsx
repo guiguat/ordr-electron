@@ -333,7 +333,7 @@ const Products: React.FC = () => {
             </th>
             <th scope="col">Price</th>
             <th scope="col">Stock</th>
-            <th scope="col">Type</th>
+            <th scope="col">Dish</th>
           </tr>
         </thead>
         <tbody className="table-products">
@@ -351,7 +351,7 @@ const Products: React.FC = () => {
               <td className={`${product.type === "" ? "" : "d-none"}`}>
                 {product.stock}
               </td>
-              <td>{product.type === "" ? "" : product.type.toUpperCase()}</td>
+              <td>{product.type === "" ? "" : "Yes"}</td>
             </tr>
           ))}
         </tbody>
