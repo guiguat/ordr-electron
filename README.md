@@ -8,7 +8,7 @@
 
 Ordr helps the manager to keep track of the money that is comming in and also the stock of every product in the database, with an intuitive and clean user interface to make the seller's life easier and quicker
 
-![](header.png)
+![](./github/preview.gif)
 
 ## Installation
 
