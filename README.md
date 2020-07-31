@@ -1,5 +1,5 @@
 # ORDR
-> This is a restaurant management system made with TypeScript React & Electron in the frontend and a TypeScript NodeJS Express REST API as the backend
+> This is a restaurant management system made with TypeScript React & Electron as the frontend and a TypeScript NodeJS Express REST API as the backend
 
 ![](https://img.shields.io/badge/React-v^16.13.1-blue)
 ![](https://img.shields.io/badge/Firebase-Auth-orange)
