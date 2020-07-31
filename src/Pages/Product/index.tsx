@@ -278,9 +278,9 @@ const Products: React.FC = () => {
       </Modal>
 
       <h3 className="mb-2">Product</h3>
-      <header className="container mb-0 position-sticky bg-white py-3">
-        <ul className="row m-0 px-auto">
-          <li className="col col-md-2">
+      <header className="container mb-0 px-0 bg-white py-3">
+        <ul className="d-flex p-0">
+          <li className="mr-4">
             <button
               className="btn shadow-sm btn-success"
               onClick={() => setCreateModalShow(true)}
@@ -289,7 +289,7 @@ const Products: React.FC = () => {
               Create
             </button>
           </li>
-          <li className="col col-md-2">
+          <li className="mr-4">
             <button
               className="btn shadow-sm btn-warning"
               onClick={() => {
@@ -300,7 +300,7 @@ const Products: React.FC = () => {
               Update
             </button>
           </li>
-          <li className="col col-md-2">
+          <li className="mr-4">
             <button
               className="btn shadow-sm btn-danger"
               disabled={!prodSelected.id}
@@ -310,7 +310,7 @@ const Products: React.FC = () => {
               Delete
             </button>
           </li>
-          <li className="col col-md-2">
+          <li className="mr-4">
             <button
               className="btn shadow-sm btn-info"
               onClick={() => {
