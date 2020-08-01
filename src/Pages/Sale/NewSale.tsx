@@ -22,22 +22,37 @@ const NewSale: React.FC = () => {
   let totalCompra = 0.0;
   let history = useHistory();
 
+  if (productData.error)
+    console.log(
+      "An error occurred when trying to reach the server:\n" + productData.error
+    );
+  if (!productData.data || !costumerData.data) return <Loading />;
+
   function handleSelectSubmit(event: any) {
     event.preventDefault();
-    if (selectValue !== 0 && selectValue && amount !== 0 && amount) {
-      let selectedProdAux = selectedProducts;
-      const prod = productData.data?.filter(
-        (product) => product.id === selectValue
-      );
-      if (prod && prod?.length > 0) {
-        for (let i = 0; i < amount; i++) {
-          selectedProdAux.push(prod[0]);
+    try {
+      if (selectValue !== 0 && selectValue && amount !== 0 && amount) {
+        let selectedProdAux = selectedProducts;
+        const prod = productData.data?.filter(
+          (product) => product.id === selectValue
+        );
+        if (prod && prod?.length > 0) {
+          for (let i = 0; i < amount; i++) {
+            if (prod[0].stock >= amount || prod[0].type === "dish") {
+              selectedProdAux.push(prod[0]);
+            } else
+              throw new Error(
+                `${prod[0].name} has only ${prod[0].stock} items left in stock`
+              );
+          }
+          setSelectedProducts(selectedProdAux);
         }
-        setSelectedProducts(selectedProdAux);
-      }
-      setAmount(0);
-      setSelectValue(0);
-    } else return;
+        setAmount(0);
+        setSelectValue(0);
+      } else throw Error("Please fill in the fields properly");
+    } catch (error) {
+      alert(error);
+    }
   }
 
   async function handleSubmit(event: any) {
@@ -73,12 +88,6 @@ const NewSale: React.FC = () => {
       alert("Please fill the inputs properly");
     }
   }
-
-  if (productData.error)
-    console.log(
-      "An error occurred when trying to reach the server:\n" + productData.error
-    );
-  if (!productData.data || !costumerData.data) return <Loading />;
 
   return (
     <>
@@ -158,6 +167,14 @@ const NewSale: React.FC = () => {
             })}
           </tbody>
         </table>
+
+        <button
+          onClick={() => setSelectedProducts([])}
+          className="w-100 btn btn-dark mb-4 rounded"
+        >
+          Clear
+        </button>
+
         <div className="d-flex">
           <div className="form-group">
             <label htmlFor="paid">Paid:</label>
