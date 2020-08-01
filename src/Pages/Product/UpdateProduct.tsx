@@ -79,22 +79,6 @@ const UpdateProduct: React.FC<IProductForm> = ({ onClear }) => {
             id="price"
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="stock">Stock count *</label>
-          <input
-            type="number"
-            value={prodSelected.stock ?? 0}
-            required
-            onChange={(event) =>
-              setProdSelected({
-                ...prodSelected,
-                stock: parseInt(event.target.value),
-              })
-            }
-            className="form-control"
-            id="stock"
-          />
-        </div>
         <div className="form-group mb-3">
           <label className="mr-2" htmlFor="typeCheck">
             Type:{" "}
