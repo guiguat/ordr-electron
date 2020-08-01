@@ -7,53 +7,20 @@ import Loading from "../../Components/Loading";
 import Modal from "react-bootstrap/Modal";
 
 import { mutate } from "swr";
+import NewCostumer from "./NewCostumer";
+import UpdateCostumer from "./UpdateCostumer";
 
 const Costumer: React.FC = () => {
   const { Api, useAxios } = useApi();
   const [costumer, setCostumer] = useState<ICostumer>({} as ICostumer);
-  const [name, setName] = useState("");
-  const [document, setDocument] = useState("");
   const [showNewCostumer, setShowNewCostumer] = useState(false);
-  const [showEditCostumer, setShowEditCostumer] = useState(false);
+  const [showUpdateCostumer, setShowUpdateCostumer] = useState(false);
 
   const { data, error } = useAxios<ICostumer[]>("/costumer");
 
   if (error)
     alert("An error occurred when trying to reach the server:\n" + error);
   if (!data) return <Loading />;
-
-  async function createNewCostumer(event: any) {
-    event.preventDefault();
-    try {
-      const data = {
-        name,
-        document,
-      };
-      const response = await Api.post("/costumer", data);
-      alert(response.data.message);
-      clear();
-    } catch (e) {
-      alert("An error occurred when trying to reach the server:\n" + e);
-    }
-  }
-
-  async function updateCostumer(event: any) {
-    event.preventDefault();
-    try {
-      if (costumer && costumer.id) {
-        const data = {
-          id: costumer.id,
-          name,
-          document,
-        };
-        const response = await Api.put("/costumer", data);
-        alert(response.data.message);
-        clear();
-      }
-    } catch (e) {
-      alert("An error occurred when trying to reach the server:\n" + e);
-    }
-  }
 
   async function deleteCostumer(id: number) {
     let res = window.confirm("Are you sure? This will delete all his records");
@@ -66,14 +33,6 @@ const Costumer: React.FC = () => {
         alert("An error occurred when trying to reach the server:\n" + e);
       }
     }
-  }
-
-  function clear() {
-    setName("");
-    setDocument("");
-    setCostumer({} as ICostumer);
-    setShowEditCostumer(false);
-    setShowNewCostumer(false);
   }
 
   return (
@@ -93,93 +52,28 @@ const Costumer: React.FC = () => {
         show={showNewCostumer}
         centered
         onHide={() => {
-          clear();
+          setShowNewCostumer(false);
         }}
       >
         <Modal.Header closeButton>
           <Modal.Title>New Costumer</Modal.Title>
         </Modal.Header>
-        <form onSubmit={createNewCostumer}>
-          <Modal.Body>
-            <div className="form-group">
-              <label htmlFor="name">Name *</label>
-              <input
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="form-control form-control-sm"
-                id="name"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="document">Document *</label>
-              <input
-                type="text"
-                required
-                value={document}
-                onChange={(e) => setDocument(e.target.value)}
-                className="form-control form-control-sm"
-                id="document"
-              />
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <button
-              className="btn btn-primary w-100"
-              disabled={!name || !document}
-              type="submit"
-            >
-              <FiUserPlus className="mb-1 mr-2" /> Create
-            </button>
-          </Modal.Footer>
-        </form>
+        <NewCostumer onClose={() => setShowNewCostumer(false)} />
       </Modal>
 
       <Modal
-        show={showEditCostumer}
+        show={showUpdateCostumer}
         onHide={() => {
-          clear();
+          setShowUpdateCostumer(false);
         }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Update info</Modal.Title>
         </Modal.Header>
-        <form onSubmit={updateCostumer}>
-          <Modal.Body>
-            <div className="form-group">
-              <label htmlFor="name">Name *</label>
-              <input
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="form-control form-control-sm"
-                id="name"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="document">Document *</label>
-              <input
-                type="text"
-                required
-                value={document}
-                onChange={(e) => setDocument(e.target.value)}
-                className="form-control form-control-sm"
-                id="document"
-              />
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <button
-              disabled={!name || !document}
-              className="btn btn-warning w-100"
-              type="submit"
-            >
-              <FiEdit className="mb-1 mr-2" /> Update
-            </button>
-          </Modal.Footer>
-        </form>
+        <UpdateCostumer
+          onClose={() => setShowUpdateCostumer(false)}
+          costumer={costumer}
+        />
       </Modal>
 
       <div className="container-fluid mt-3 p-0" id="costumers">
@@ -202,9 +96,7 @@ const Costumer: React.FC = () => {
                       className="btn p-0 mr-1"
                       onClick={(e) => {
                         setCostumer(c);
-                        setName(c.name);
-                        setDocument(c.document);
-                        setShowEditCostumer(true);
+                        setShowUpdateCostumer(true);
                       }}
                     >
                       <FiEdit className="text-warning" size={24} />
