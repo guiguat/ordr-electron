@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiArrowLeft, FiDollarSign, FiPlus } from "react-icons/fi";
+import { FiArrowLeft, FiDollarSign, FiPlus, FiDelete } from "react-icons/fi";
 import Loading from "../../Components/Loading";
 import { useApi } from "../../Contexts/Api";
 import { useAuth } from "../../Contexts/Auth";
@@ -151,8 +151,11 @@ const NewSale: React.FC = () => {
         <table className="table table-sm mt-3">
           <thead className="thead-light">
             <tr>
-              <th scope="col">Product</th>
+              <th scope="col" colSpan={2}>
+                Product
+              </th>
               <th scope="col">Price</th>
+              <th scope="col">Remove</th>
             </tr>
           </thead>
           <tbody>
@@ -160,8 +163,20 @@ const NewSale: React.FC = () => {
               totalCompra += p?.price ? p.price : 0;
               return (
                 <tr key={index}>
-                  <td>{p?.name}</td>
+                  <td colSpan={2}>{p?.name}</td>
                   <td>{p?.price}</td>
+                  <td>
+                    <button
+                      className="btn"
+                      onClick={() =>
+                        setSelectedProducts(
+                          selectedProducts.filter((val, i) => !(i === index))
+                        )
+                      }
+                    >
+                      <FiDelete className="text-danger" />
+                    </button>
+                  </td>
                 </tr>
               );
             })}
