@@ -5,3 +5,6 @@ export interface IProduct{
     stock: number,
     type: string
 }
+export interface IProductForm {
+    onClear(modal: string): void;
+}
