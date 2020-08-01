@@ -12,3 +12,7 @@ export interface ICostumer{
     name:string,
     document:string
 }
+
+export interface ICostumerForm{
+    onClose():void
+}
