@@ -10,7 +10,7 @@ import { useApi } from "../../Contexts/Api";
 import { IProduct } from "./models";
 
 import Loading from "../../Components/Loading";
-import CreateProduct from "./Create";
+import CreateProduct from "./CreateProduct";
 import UpdateProduct from "./UpdateProduct";
 import StockProduct from "./StockProduct";
 

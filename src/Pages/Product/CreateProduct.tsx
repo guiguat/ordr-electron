@@ -8,7 +8,7 @@ interface ICreateFormProps {
   onClose(): void;
 }
 
-const Create: React.FC<ICreateFormProps> = ({ onClose }) => {
+const CreateProduct: React.FC<ICreateFormProps> = ({ onClose }) => {
   const { Api } = useApi();
   const [Stock, setStock] = useState("0");
   const [Name, setName] = useState("");
@@ -104,4 +104,4 @@ const Create: React.FC<ICreateFormProps> = ({ onClose }) => {
   );
 };
 
-export default Create;
+export default CreateProduct;
