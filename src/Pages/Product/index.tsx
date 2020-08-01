@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 
-import "./Products.scss";
 import { FiPlus, FiEdit, FiTrash2, FiShoppingBag } from "react-icons/fi";
-import Create from "./Create";
 import Modal from "react-bootstrap/Modal";
+import { mutate } from "swr";
+
+import "./Products.scss";
 import { useForms } from "../../Contexts/Forms";
 import { useApi } from "../../Contexts/Api";
 import { IProduct } from "./models";
+
 import Loading from "../../Components/Loading";
+import CreateProduct from "./Create";
+import UpdateProduct from "./UpdateProduct";
+import StockProduct from "./StockProduct";
 
 const Products: React.FC = () => {
   const { setProdSelected, prodSelected } = useForms();
@@ -35,41 +40,11 @@ const Products: React.FC = () => {
           const response = await Api.delete(`/product?id=${prodSelected.id}`);
           alert(response.data.message);
           clear();
+          mutate("/product");
         } else throw new Error("Please select a product from the table below");
       } catch (e) {
         alert("An error occurred when trying to reach the server:\n" + e);
       }
-    }
-  }
-
-  async function handleStockSubmit() {
-    try {
-      const resp = await Api.put("/product", {
-        id: prodSelected.id ? prodSelected.id.toString() : "0",
-        stock: prodSelected.stock ? prodSelected.stock.toString() : "0",
-      });
-      alert(resp.data.message);
-      clear("stock");
-    } catch (error) {
-      alert("An error occurred when trying to reach the server:\n" + error);
-    }
-  }
-
-  async function handleUpdateSubmit(event: any) {
-    event.preventDefault();
-    const data = {
-      id: prodSelected.id ?? 0,
-      name: prodSelected.name ?? "",
-      price: prodSelected.price ?? 0,
-      stock: prodSelected.stock ?? 0,
-      type: prodSelected.type,
-    };
-    try {
-      const res = await Api.put("/product", data);
-      alert(res.data.message);
-      clear("update");
-    } catch (error) {
-      alert("An error occurred when trying to reach the server: \n" + error);
     }
   }
 
@@ -93,7 +68,7 @@ const Products: React.FC = () => {
           <Modal.Title>Create Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Create
+          <CreateProduct
             onClose={() => {
               setCreateModalShow(false);
             }}
@@ -112,107 +87,7 @@ const Products: React.FC = () => {
           <Modal.Title>Update Product</Modal.Title>
         </Modal.Header>
         {/* UpdateForm */}
-        <form
-          onSubmit={handleUpdateSubmit}
-          className="container px-4 rounded-lg"
-        >
-          <Modal.Body>
-            <div className="form-group">
-              <label htmlFor="id">Id *</label>
-              <input
-                type="number"
-                required
-                value={prodSelected.id ?? 0}
-                onChange={(event) =>
-                  setProdSelected({
-                    ...prodSelected,
-                    id: parseInt(event.target.value),
-                  })
-                }
-                className="form-control"
-                id="id"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="name">Name *</label>
-              <input
-                type="text"
-                required
-                value={prodSelected.name ?? ""}
-                onChange={(event) =>
-                  setProdSelected({
-                    ...prodSelected,
-                    name: event.target.value,
-                  })
-                }
-                className="form-control"
-                id="name"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="price">Price *</label>
-              <input
-                type="number"
-                value={prodSelected.price ?? 0.0}
-                required
-                onChange={(event) =>
-                  setProdSelected({
-                    ...prodSelected,
-                    price: parseFloat(event.target.value),
-                  })
-                }
-                className="form-control"
-                id="price"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="stock">Stock count *</label>
-              <input
-                type="number"
-                value={prodSelected.stock ?? 0}
-                required
-                onChange={(event) =>
-                  setProdSelected({
-                    ...prodSelected,
-                    stock: parseInt(event.target.value),
-                  })
-                }
-                className="form-control"
-                id="stock"
-              />
-            </div>
-            <div className="form-group mb-3">
-              <label className="mr-2" htmlFor="typeCheck">
-                Type:{" "}
-              </label>
-              <select
-                className="form-control"
-                value={prodSelected.type}
-                onChange={(event) =>
-                  setProdSelected({
-                    ...prodSelected,
-                    type: event.target.value ?? "",
-                  })
-                }
-              >
-                <option value="">Product</option>
-                <option value="dish">Dish</option>
-              </select>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <button
-              type="submit"
-              disabled={
-                !prodSelected.name || !prodSelected.price || !prodSelected.id
-              }
-              className="btn btn-primary"
-            >
-              <FiEdit size={18} className="mr-2 mb-1" />
-              Update
-            </button>
-          </Modal.Footer>
-        </form>
+        <UpdateProduct onClear={(modal) => clear(modal)} />
       </Modal>
 
       <Modal
@@ -226,55 +101,7 @@ const Products: React.FC = () => {
           <Modal.Title>Stock Product</Modal.Title>
         </Modal.Header>
         {/* Stock form */}
-        <form
-          onSubmit={handleStockSubmit}
-          className="container px-4 rounded-lg"
-        >
-          <Modal.Body>
-            <div className="form-group">
-              <label htmlFor="id">Id *</label>
-              <input
-                type="number"
-                required
-                value={prodSelected.id}
-                onChange={(event) =>
-                  setProdSelected({
-                    ...prodSelected,
-                    id: parseInt(event.target.value),
-                  })
-                }
-                className="form-control"
-                id="id"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="Stock">Stock count *</label>
-              <input
-                type="number"
-                required
-                value={prodSelected.stock}
-                onChange={(event) =>
-                  setProdSelected({
-                    ...prodSelected,
-                    stock: parseInt(event.target.value),
-                  })
-                }
-                className="form-control"
-                id="Stock"
-              />
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <button
-              type="submit"
-              disabled={!prodSelected.id}
-              className="btn btn-info"
-            >
-              <FiShoppingBag size={18} className="mr-2 mb-1" />
-              Stock
-            </button>
-          </Modal.Footer>
-        </form>
+        <StockProduct onClear={(modal) => clear(modal)} />
       </Modal>
 
       <h3 className="mb-2">Product</h3>
