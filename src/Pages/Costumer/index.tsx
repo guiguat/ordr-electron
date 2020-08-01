@@ -6,6 +6,8 @@ import { ICostumer } from "./models";
 import Loading from "../../Components/Loading";
 import Modal from "react-bootstrap/Modal";
 
+import { mutate } from "swr";
+
 const Costumer: React.FC = () => {
   const { Api, useAxios } = useApi();
   const [costumer, setCostumer] = useState<ICostumer>({} as ICostumer);
@@ -29,9 +31,7 @@ const Costumer: React.FC = () => {
       };
       const response = await Api.post("/costumer", data);
       alert(response.data.message);
-      setName("");
-      setDocument("");
-      setShowNewCostumer(false);
+      clear();
     } catch (e) {
       alert("An error occurred when trying to reach the server:\n" + e);
     }
@@ -48,10 +48,7 @@ const Costumer: React.FC = () => {
         };
         const response = await Api.put("/costumer", data);
         alert(response.data.message);
-        setName("");
-        setDocument("");
-        setCostumer({} as ICostumer);
-        setShowEditCostumer(false);
+        clear();
       }
     } catch (e) {
       alert("An error occurred when trying to reach the server:\n" + e);
@@ -64,10 +61,19 @@ const Costumer: React.FC = () => {
       try {
         const response = await Api.delete(`/costumer?id=${id}`);
         alert(response.data.message);
+        mutate("/costumer");
       } catch (e) {
         alert("An error occurred when trying to reach the server:\n" + e);
       }
     }
+  }
+
+  function clear() {
+    setName("");
+    setDocument("");
+    setCostumer({} as ICostumer);
+    setShowEditCostumer(false);
+    setShowNewCostumer(false);
   }
 
   return (
@@ -87,7 +93,7 @@ const Costumer: React.FC = () => {
         show={showNewCostumer}
         centered
         onHide={() => {
-          setShowNewCostumer(false);
+          clear();
         }}
       >
         <Modal.Header closeButton>
@@ -133,7 +139,7 @@ const Costumer: React.FC = () => {
       <Modal
         show={showEditCostumer}
         onHide={() => {
-          setShowEditCostumer(false);
+          clear();
         }}
       >
         <Modal.Header closeButton>
