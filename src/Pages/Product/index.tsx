@@ -58,7 +58,6 @@ const Products: React.FC = () => {
 
   return (
     <>
-      {/* modals */}
       <Modal
         show={createModalShow}
         onHide={() => setCreateModalShow(false)}
@@ -86,7 +85,6 @@ const Products: React.FC = () => {
         <Modal.Header closeButton>
           <Modal.Title>Update Product</Modal.Title>
         </Modal.Header>
-        {/* UpdateForm */}
         <UpdateProduct onClear={(modal) => clear(modal)} />
       </Modal>
 
@@ -100,7 +98,6 @@ const Products: React.FC = () => {
         <Modal.Header closeButton>
           <Modal.Title>Stock Product</Modal.Title>
         </Modal.Header>
-        {/* Stock form */}
         <StockProduct onClear={(modal) => clear(modal)} />
       </Modal>
 
