@@ -22,10 +22,11 @@ $yellow:  #eb9900 ;
 .btn-warning{
     color:white!important
 }
-.btn:hover{
+.btn:hover, .nav-link:hover{
     transform: scale(1.02);
     transition: ease 100ms;
 }
+
 html, body, #root{
     width: 100vw!important;
     height: 100vh!important;
