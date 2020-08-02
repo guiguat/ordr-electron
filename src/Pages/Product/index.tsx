@@ -178,7 +178,7 @@ const Products: React.FC = () => {
               >
                 {p.name}
               </td>
-              <td colSpan={p.type === "" ? 1 : 2}>{p.price}</td>
+              <td colSpan={p.type === "" ? 1 : 2}>${p.price.toFixed(2)}</td>
               <td
                 className={`${p.stock <= 0 ? "text-danger" : null} ${
                   p.type.trim() === "" ? null : "d-none"

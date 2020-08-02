@@ -164,7 +164,7 @@ const NewSale: React.FC = () => {
               return (
                 <tr key={index}>
                   <td colSpan={2}>{p?.name}</td>
-                  <td>{p?.price}</td>
+                  <td>${p?.price.toFixed(2)}</td>
                   <td>
                     <button
                       className="btn"
@@ -185,9 +185,9 @@ const NewSale: React.FC = () => {
 
         <button
           onClick={() => setSelectedProducts([])}
-          className="w-100 btn btn-dark mb-4 rounded"
+          className="w-100 btn btn-danger mb-4 rounded"
         >
-          Clear
+          Remove all
         </button>
 
         <div className="d-flex">
@@ -203,10 +203,10 @@ const NewSale: React.FC = () => {
           </div>
           <div className="col">
             <h5 className="mt-2 text-primary">
-              Total: R${totalCompra.toFixed(2)}
+              Total: ${totalCompra.toFixed(2)}
             </h5>
             <h5 className="text-secondary">
-              Change: R${`${(paidVal - totalCompra).toFixed(2)}`}
+              Change: ${`${(paidVal - totalCompra).toFixed(2)}`}
             </h5>
           </div>
         </div>

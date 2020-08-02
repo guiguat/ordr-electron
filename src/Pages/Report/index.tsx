@@ -56,10 +56,10 @@ const Report: React.FC = () => {
           {data?.map((r: IReportData) => (
             <tr key={r.id}>
               <th scope="row">{r.dateTime}</th>
-              <td>{r.debit}</td>
-              <td>{r.credit}</td>
-              <td>{r.cash}</td>
-              <td>{r.total}</td>
+              <td>${r.debit.toFixed(2)}</td>
+              <td>${r.credit.toFixed(2)}</td>
+              <td>${r.cash.toFixed(2)}</td>
+              <td>${r.total.toFixed(2)}</td>
             </tr>
           ))}
         </tbody>

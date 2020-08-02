@@ -46,13 +46,13 @@ const CostumerOrders: React.FC<ICostumerOrdersProps> = ({ costumer_id }) => {
           {data?.map((o: IOrderProduct, index) => (
             <tr key={index}>
               <td>{o.order}</td>
-              <td>{`R$${o.price.toFixed(2)}`}</td>
+              <td>{`$${o.price.toFixed(2)}`}</td>
             </tr>
           ))}
         </tbody>
       </table>
       <span className="font-weight-bold text-grey-800">
-        TOTAL: R${total.toFixed(2)}
+        TOTAL: ${total.toFixed(2)}
       </span>
       <br />
       <br />

@@ -30,7 +30,7 @@ const SaleItem: React.FC<ISaleItemProps> = ({ data }) => {
                   return (
                     <tr key={`${p.id}@${index}`}>
                       <td>{p.name}</td>
-                      <td>{p.price}</td>
+                      <td>${p.price.toFixed(2)}</td>
                     </tr>
                   );
                 })}
